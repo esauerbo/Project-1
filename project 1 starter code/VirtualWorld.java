@@ -13,41 +13,46 @@ current view (think virtual camera) into that world (WorldView)
 public final class VirtualWorld
    extends PApplet
 {
-   public static final int TIMER_ACTION_PERIOD = 100;
+   private static final int BGND_NUM_PROPERTIES = 4;
+   private static final int BGND_ID = 1;
+   private static final int BGND_COL = 2;
+   private static final int BGND_ROW = 3;
 
-   public static final int VIEW_WIDTH = 640;
-   public static final int VIEW_HEIGHT = 480;
-   public static final int TILE_WIDTH = 32;
-   public static final int TILE_HEIGHT = 32;
-   public static final int WORLD_WIDTH_SCALE = 2;
-   public static final int WORLD_HEIGHT_SCALE = 2;
+   private static final int TIMER_ACTION_PERIOD = 100;
 
-   public static final int VIEW_COLS = VIEW_WIDTH / TILE_WIDTH;
-   public static final int VIEW_ROWS = VIEW_HEIGHT / TILE_HEIGHT;
-   public static final int WORLD_COLS = VIEW_COLS * WORLD_WIDTH_SCALE;
-   public static final int WORLD_ROWS = VIEW_ROWS * WORLD_HEIGHT_SCALE;
+   private static final int VIEW_WIDTH = 640;
+   private static final int VIEW_HEIGHT = 480;
+   private static final int TILE_WIDTH = 32;
+   private static final int TILE_HEIGHT = 32;
+   private static final int WORLD_WIDTH_SCALE = 2;
+   private static final int WORLD_HEIGHT_SCALE = 2;
 
-   public static final String IMAGE_LIST_FILE_NAME = "imagelist";
-   public static final String DEFAULT_IMAGE_NAME = "background_default";
-   public static final int DEFAULT_IMAGE_COLOR = 0x808080;
+   private static final int VIEW_COLS = VIEW_WIDTH / TILE_WIDTH;
+   private static final int VIEW_ROWS = VIEW_HEIGHT / TILE_HEIGHT;
+   private static final int WORLD_COLS = VIEW_COLS * WORLD_WIDTH_SCALE;
+   private static final int WORLD_ROWS = VIEW_ROWS * WORLD_HEIGHT_SCALE;
 
-   public static final String LOAD_FILE_NAME = "world.sav";
+   private static final String IMAGE_LIST_FILE_NAME = "imagelist";
+   private static final String DEFAULT_IMAGE_NAME = "background_default";
+   private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
-   public static final String FAST_FLAG = "-fast";
-   public static final String FASTER_FLAG = "-faster";
-   public static final String FASTEST_FLAG = "-fastest";
-   public static final double FAST_SCALE = 0.5;
-   public static final double FASTER_SCALE = 0.25;
-   public static final double FASTEST_SCALE = 0.10;
+   private static final String LOAD_FILE_NAME = "world.sav";
 
-   public static double timeScale = 1.0;
+   private static final String FAST_FLAG = "-fast";
+   private static final String FASTER_FLAG = "-faster";
+   private static final String FASTEST_FLAG = "-fastest";
+   private static final double FAST_SCALE = 0.5;
+   private static final double FASTER_SCALE = 0.25;
+   private static final double FASTEST_SCALE = 0.10;
+
+   private static double timeScale = 1.0;
 
    public ImageStore imageStore;
    public WorldModel world;
-   public WorldView view;
-   public EventScheduler scheduler;
+   private WorldView view;
+   private EventScheduler scheduler;
 
-   public long next_time;
+   private long next_time;
 
    public void settings()
    {
@@ -80,11 +85,11 @@ public final class VirtualWorld
       long time = System.currentTimeMillis();
       if (time >= next_time)
       {
-         Functions.updateOnTime(this.scheduler, time);
+         this.scheduler.updateOnTime(time);
          next_time = time + TIMER_ACTION_PERIOD;
       }
 
-      Functions.drawViewport(view);
+      view.drawViewport();
    }
 
    public void keyPressed()
@@ -109,14 +114,14 @@ public final class VirtualWorld
                dx = 1;
                break;
          }
-         Functions.shiftView(view, dx, dy);
+         view.shiftView(dx, dy);
       }
    }
 
    public static Background createDefaultBackground(ImageStore imageStore)
    {
       return new Background(DEFAULT_IMAGE_NAME,
-         Functions.getImageList(imageStore, DEFAULT_IMAGE_NAME));
+              imageStore.getImageList(DEFAULT_IMAGE_NAME));
    }
 
    public static PImage createImageColored(int width, int height, int color)
@@ -137,7 +142,7 @@ public final class VirtualWorld
       try
       {
          Scanner in = new Scanner(new File(filename));
-         Functions.loadImages(in, imageStore, screen);
+         imageStore.loadImages(in, screen);
       }
       catch (FileNotFoundException e)
       {
@@ -151,7 +156,7 @@ public final class VirtualWorld
       try
       {
          Scanner in = new Scanner(new File(filename));
-         Functions.load(in, world, imageStore);
+         world.load(in, imageStore);
       }
       catch (FileNotFoundException e)
       {
@@ -166,7 +171,7 @@ public final class VirtualWorld
       {
          //Only start actions for entities that include action (not those with just animations)
          if (entity.actionPeriod > 0)
-            Functions.scheduleActions(entity, scheduler, world, imageStore);
+            scheduler.scheduleActions(entity, world, imageStore);
       }
    }
 
@@ -188,6 +193,108 @@ public final class VirtualWorld
          }
       }
    }
+
+   public static boolean parseBackground(String [] properties,
+                                         WorldModel world, ImageStore imageStore)
+   {
+      if (properties.length == BGND_NUM_PROPERTIES)
+      {
+         Point pt = new Point(Integer.parseInt(properties[BGND_COL]),
+                 Integer.parseInt(properties[BGND_ROW]));
+         String id = properties[BGND_ID];
+         world.setBackground(pt,
+                 new Background(id, imageStore.getImageList(id)));
+      }
+
+      return properties.length == BGND_NUM_PROPERTIES;
+   }
+
+   public static boolean parseOcto(String [] properties, WorldModel world,
+                                   ImageStore imageStore)
+   {
+      if (properties.length == Entity.OCTO_NUM_PROPERTIES)
+      {
+         Point pt = new Point(Integer.parseInt(properties[Entity.OCTO_COL]),
+                 Integer.parseInt(properties[Entity.OCTO_ROW]));
+         Entity entity = WorldView.createOctoNotFull(properties[Entity.OCTO_ID],
+                 Integer.parseInt(properties[Entity.OCTO_LIMIT]),
+                 pt,
+                 Integer.parseInt(properties[Entity.OCTO_ACTION_PERIOD]),
+                 Integer.parseInt(properties[Entity.OCTO_ANIMATION_PERIOD]),
+                 imageStore.getImageList(Entity.OCTO_KEY));
+         world.tryAddEntity(entity);
+      }
+
+      return properties.length == Entity.OCTO_NUM_PROPERTIES;
+   }
+
+   public static boolean parseObstacle(String [] properties, WorldModel world,
+                                       ImageStore imageStore)
+   {
+      if (properties.length == Entity.OBSTACLE_NUM_PROPERTIES)
+      {
+         Point pt = new Point(
+                 Integer.parseInt(properties[Entity.OBSTACLE_COL]),
+                 Integer.parseInt(properties[Entity.OBSTACLE_ROW]));
+         Entity entity = WorldView.createObstacle(properties[Entity.OBSTACLE_ID],
+                 pt, imageStore.getImageList(Entity.OBSTACLE_KEY));
+         world.tryAddEntity(entity);
+      }
+
+      return properties.length == Entity.OBSTACLE_NUM_PROPERTIES;
+   }
+
+   public static boolean parseFish(String [] properties, WorldModel world,
+                                   ImageStore imageStore)
+   {
+      if (properties.length == Entity.FISH_NUM_PROPERTIES)
+      {
+         Point pt = new Point(Integer.parseInt(properties[Entity.FISH_COL]),
+                 Integer.parseInt(properties[Entity.FISH_ROW]));
+         Entity entity = WorldView.createFish(properties[Entity.FISH_ID],
+                 pt, Integer.parseInt(properties[Entity.FISH_ACTION_PERIOD]),
+                 imageStore.getImageList(Entity.FISH_KEY));
+         world.tryAddEntity(entity);
+      }
+
+      return properties.length == Entity.FISH_NUM_PROPERTIES;
+   }
+
+   public static boolean parseAtlantis(String [] properties, WorldModel world,
+                                       ImageStore imageStore)
+   {
+      if (properties.length == Entity.ATLANTIS_NUM_PROPERTIES)
+      {
+         Point pt = new Point(Integer.parseInt(properties[Entity.ATLANTIS_COL]),
+                 Integer.parseInt(properties[Entity.ATLANTIS_ROW]));
+         Entity entity = WorldView.createAtlantis(properties[Entity.ATLANTIS_ID],
+                 pt, imageStore.getImageList(Entity.ATLANTIS_KEY));
+         world.tryAddEntity(entity);
+      }
+
+      return properties.length == Entity.ATLANTIS_NUM_PROPERTIES;
+   }
+
+   public static boolean parseSgrass(String [] properties, WorldModel world,
+                                     ImageStore imageStore)
+   {
+      if (properties.length == Entity.SGRASS_NUM_PROPERTIES)
+      {
+         Point pt = new Point(Integer.parseInt(properties[Entity.SGRASS_COL]),
+                 Integer.parseInt(properties[Entity.SGRASS_ROW]));
+         Entity entity = WorldView.createSgrass(properties[Entity.SGRASS_ID],
+                 pt,
+                 Integer.parseInt(properties[Entity.SGRASS_ACTION_PERIOD]),
+                 imageStore.getImageList(Entity.SGRASS_KEY));
+         world.tryAddEntity(entity);
+      }
+
+      return properties.length == Entity.SGRASS_NUM_PROPERTIES;
+   }
+
+
+
+
 
    public static void main(String [] args)
    {

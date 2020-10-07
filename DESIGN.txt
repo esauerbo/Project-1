@@ -1,0 +1,78 @@
+--Action--
+
+--EventScheduler--
+executeAction
+executeAnimationAction
+executeActivityAction
+(The three functions listed above were moved to EventScheduler because the EventScheduler class regulates what
+actions are occuring. These functions execute, or call, the actions.)
+
+scheduleActions
+scheduleEvent
+unscheduleAllEvents
+removePendingEvents
+(EventScheduler regulates and schedules actions)
+
+transformNotFull
+transformFull
+moveToFull
+moveToNotFull
+(These functions involve moving and transforming the entities. They take the eventSchedueler as a paramter
+so they were moved to this class. Event scheduler is supposed to control what is happening in the virtual
+world, so these functions were moved there.)
+
+
+--WorldModel--
+moveToCrab
+(This function was moved to WorldModel because WorldModel regulates where entities are in relation to one
+another.)
+load
+processLine
+(Both of these functions took WorldModel as a parameter so were moved to the class)
+
+findOpenAronud
+(Moved to WorldModel because this function deals with the entities inside the world.)
+
+getCurrentImage
+(Moved to WorldModel because it deals with the background image)
+
+nearestEntity
+(Moved to WorldModel because it deals with the entities in the world.)
+keys for entities: world model
+
+
+
+
+
+--Entity--
+executeOctoFullActivity
+executeOctoNotFullActivity
+executeFishActivity
+executeCrabActivity
+executeQuakeActivity
+executeAtlantisActivity
+executeSgrassActivity
+(The above functions were all moved to the class Entity. Entity regulates what each entity is doing at any given
+point in time, so it will be in charge of executing the activities of the indiviudal objects.)
+
+nextPositionOcto
+nextPositionCrab
+(Both moved to Entity class because the functions deal with the behavior of specific entities.)
+
+
+--Point--
+adjacent
+(Moved to Point because it only involves this class)
+
+
+--ImageStore--
+getImageList
+loadImages
+processImageLine
+getImages
+(These functions were all moved to
+
+
+--Viewport--
+setAlpha
+

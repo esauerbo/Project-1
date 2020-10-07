@@ -11,24 +11,10 @@ import processing.core.PApplet;
 Functions - everything our virtual world is doing right now - is this a good design?
  */
 
-final class Functions
+/*final class Functions
 {
    public static final Random rand = new Random();
 
-   public static final String OCTO_KEY = "octo";
-   public static final int OCTO_NUM_PROPERTIES = 7;
-   public static final int OCTO_ID = 1;
-   public static final int OCTO_COL = 2;
-   public static final int OCTO_ROW = 3;
-   public static final int OCTO_LIMIT = 4;
-   public static final int OCTO_ACTION_PERIOD = 5;
-   public static final int OCTO_ANIMATION_PERIOD = 6;
-
-   public static final String OBSTACLE_KEY = "obstacle";
-   public static final int OBSTACLE_NUM_PROPERTIES = 4;
-   public static final int OBSTACLE_ID = 1;
-   public static final int OBSTACLE_COL = 2;
-   public static final int OBSTACLE_ROW = 3;
 
    public static final String FISH_KEY = "fish";
    public static final int FISH_NUM_PROPERTIES = 5;
@@ -43,7 +29,7 @@ final class Functions
    public static final int ATLANTIS_COL = 2;
    public static final int ATLANTIS_ROW = 3;
    public static final int ATLANTIS_ANIMATION_PERIOD = 70;
-   public static final int ATLANTIS_ANIMATION_REPEAT_COUNT = 7;
+//   public static final int ATLANTIS_ANIMATION_REPEAT_COUNT = 7;
 
    public static final String SGRASS_KEY = "seaGrass";
    public static final int SGRASS_NUM_PROPERTIES = 5;
@@ -52,39 +38,39 @@ final class Functions
    public static final int SGRASS_ROW = 3;
    public static final int SGRASS_ACTION_PERIOD = 4;
 
-   public static final String CRAB_KEY = "crab";
+  /* public static final String CRAB_KEY = "crab";
    public static final String CRAB_ID_SUFFIX = " -- crab";
    public static final int CRAB_PERIOD_SCALE = 4;
    public static final int CRAB_ANIMATION_MIN = 50;
-   public static final int CRAB_ANIMATION_MAX = 150;
+   public static final int CRAB_ANIMATION_MAX = 150;*/
 
-   public static final String QUAKE_KEY = "quake";
+  /* public static final String QUAKE_KEY = "quake";
    public static final String QUAKE_ID = "quake";
    public static final int QUAKE_ACTION_PERIOD = 1100;
    public static final int QUAKE_ANIMATION_PERIOD = 100;
-   public static final int QUAKE_ANIMATION_REPEAT_COUNT = 10;
+   public static final int QUAKE_ANIMATION_REPEAT_COUNT = 10;*/
 
    
-   public static final String FISH_ID_PREFIX = "fish -- ";
+ /*  public static final String FISH_ID_PREFIX = "fish -- ";
    public static final int FISH_CORRUPT_MIN = 20000;
    public static final int FISH_CORRUPT_MAX = 30000;
    public static final int FISH_REACH = 1;
 
-   public static final String BGND_KEY = "background";
-   public static final int BGND_NUM_PROPERTIES = 4;
+ //  public static final String BGND_KEY = "background";
+ /*  public static final int BGND_NUM_PROPERTIES = 4;
    public static final int BGND_ID = 1;
    public static final int BGND_COL = 2;
-   public static final int BGND_ROW = 3;
+   public static final int BGND_ROW = 3;*/
 
-   public static final int COLOR_MASK = 0xffffff;
-   public static final int KEYED_IMAGE_MIN = 5;
+  // public static final int COLOR_MASK = 0xffffff;
+ /*  public static final int KEYED_IMAGE_MIN = 5;
    private static final int KEYED_RED_IDX = 2;
    private static final int KEYED_GREEN_IDX = 3;
    private static final int KEYED_BLUE_IDX = 4;
+*/
+//   public static final int PROPERTY_KEY = 0;
 
-   public static final int PROPERTY_KEY = 0;
-
-   public static PImage getCurrentImage(Object entity)
+  /* public static PImage getCurrentImage(Object entity)
    {
       if (entity instanceof Background)
       {
@@ -101,7 +87,7 @@ final class Functions
             String.format("getCurrentImage not supported for %s",
             entity));
       }
-   }
+   }*/
 
  /*  public static int getAnimationPeriod(Entity entity)
    {
@@ -120,12 +106,12 @@ final class Functions
       }
    }*/
 
-   public static void nextImage(Entity entity)
+  /* public static void nextImage(Entity entity)
    {
       entity.imageIndex = (entity.imageIndex + 1) % entity.images.size();
    }
-
-   public static void executeAction(Action action, EventScheduler scheduler)
+*/
+  /* public static void executeAction(Action action, EventScheduler scheduler)
    {
       switch (action.kind)
       {
@@ -138,11 +124,11 @@ final class Functions
          break;
       }
    }
-
-   public static void executeAnimationAction(Action action,
+*/
+  /* public static void executeAnimationAction(Action action,
       EventScheduler scheduler)
    {
-      nextImage(action.entity);
+      action.entity.nextImage();
 
       if (action.repeatCount != 1)
       {
@@ -151,9 +137,9 @@ final class Functions
                Math.max(action.repeatCount - 1, 0)),
             action.entity.getAnimationPeriod());
       }
-   }
+   }*/
 
-   public static void executeActivityAction(Action action,
+ /*  public static void executeActivityAction(Action action,
       EventScheduler scheduler)
    {
       switch (action.entity.kind)
@@ -199,8 +185,8 @@ final class Functions
             action.entity.kind));
       }
    }
-
-   public static void executeOctoFullActivity(Entity entity, WorldModel world,
+*/
+ /*  public static void executeOctoFullActivity(Entity entity, WorldModel world,
       ImageStore imageStore, EventScheduler scheduler)
    {
       Optional<Entity> fullTarget = findNearest(world, entity.position,
@@ -221,9 +207,9 @@ final class Functions
             createActivityAction(entity, world, imageStore),
             entity.actionPeriod);
       }
-   }
+   }*/
 
-   public static void executeOctoNotFullActivity(Entity entity,
+/*   public static void executeOctoNotFullActivity(Entity entity,
       WorldModel world, ImageStore imageStore, EventScheduler scheduler)
    {
       Optional<Entity> notFullTarget = findNearest(world, entity.position,
@@ -237,9 +223,9 @@ final class Functions
             createActivityAction(entity, world, imageStore),
             entity.actionPeriod);
       }
-   }
+   }*/
 
-   public static void executeFishActivity(Entity entity, WorldModel world,
+  /* public static void executeFishActivity(Entity entity, WorldModel world,
       ImageStore imageStore, EventScheduler scheduler)
    {
       Point pos = entity.position;  // store current position before removing
@@ -255,9 +241,9 @@ final class Functions
 
       addEntity(world, crab);
       scheduleActions(crab, scheduler, world, imageStore);
-   }
+   }*/
 
-   public static void executeCrabActivity(Entity entity, WorldModel world,
+  /* public static void executeCrabActivity(Entity entity, WorldModel world,
       ImageStore imageStore, EventScheduler scheduler)
    {
       Optional<Entity> crabTarget = findNearest(world,
@@ -282,23 +268,23 @@ final class Functions
       scheduleEvent(scheduler, entity,
          createActivityAction(entity, world, imageStore),
          nextPeriod);
-   }
+   }*/
 
-   public static void executeQuakeActivity(Entity entity, WorldModel world,
+  /* public static void executeQuakeActivity(Entity entity, WorldModel world,
       ImageStore imageStore, EventScheduler scheduler)
    {
       unscheduleAllEvents(scheduler, entity);
       removeEntity(world, entity);
-   }
+   }*/
 
-   public static void executeAtlantisActivity(Entity entity, WorldModel world,
+  /* public static void executeAtlantisActivity(Entity entity, WorldModel world,
                                            ImageStore imageStore, EventScheduler scheduler)
    {
       unscheduleAllEvents(scheduler, entity);
       removeEntity(world, entity);
    }
-
-   public static void executeSgrassActivity(Entity entity, WorldModel world,
+*/
+  /* public static void executeSgrassActivity(Entity entity, WorldModel world,
       ImageStore imageStore, EventScheduler scheduler)
    {
       Optional<Point> openPt = findOpenAround(world, entity.position);
@@ -316,9 +302,9 @@ final class Functions
       scheduleEvent(scheduler, entity,
          createActivityAction(entity, world, imageStore),
          entity.actionPeriod);
-   }
+   }*/
 
-   public static void scheduleActions(Entity entity, EventScheduler scheduler,
+ /*  public static void scheduleActions(Entity entity, EventScheduler scheduler,
       WorldModel world, ImageStore imageStore)
    {
       switch (entity.kind)
@@ -375,9 +361,9 @@ final class Functions
 
       default:
       }
-   }
+   }*/
 
-   public static boolean transformNotFull(Entity entity, WorldModel world,
+  /* public static boolean transformNotFull(Entity entity, WorldModel world,
       EventScheduler scheduler, ImageStore imageStore)
    {
       if (entity.resourceCount >= entity.resourceLimit)
@@ -396,9 +382,9 @@ final class Functions
       }
 
       return false;
-   }
+   }*/
 
-   public static void transformFull(Entity entity, WorldModel world,
+ /*  public static void transformFull(Entity entity, WorldModel world,
       EventScheduler scheduler, ImageStore imageStore)
    {
       Entity octo = createOctoNotFull(entity.id, entity.resourceLimit,
@@ -410,9 +396,9 @@ final class Functions
 
       addEntity(world, octo);
       scheduleActions(octo, scheduler, world, imageStore);
-   }
+   }*/
 
-   public static boolean moveToNotFull(Entity octo, WorldModel world,
+  /* public static boolean moveToNotFull(Entity octo, WorldModel world,
       Entity target, EventScheduler scheduler)
    {
       if (adjacent(octo.position, target.position))
@@ -439,9 +425,9 @@ final class Functions
          }
          return false;
       }
-   }
+   }*/
 
-   public static boolean moveToFull(Entity octo, WorldModel world,
+  /* public static boolean moveToFull(Entity octo, WorldModel world,
       Entity target, EventScheduler scheduler)
    {
       if (adjacent(octo.position, target.position))
@@ -464,9 +450,9 @@ final class Functions
          }
          return false;
       }
-   }
+   }*/
 
-   public static boolean moveToCrab(Entity crab, WorldModel world,
+ /*  public static boolean moveToCrab(Entity crab, WorldModel world,
       Entity target, EventScheduler scheduler)
    {
       if (adjacent(crab.position, target.position))
@@ -491,9 +477,9 @@ final class Functions
          }
          return false;
       }
-   }
+   }*/
 
-   public static Point nextPositionOcto(Entity entity, WorldModel world,
+ /* public static Point nextPositionOcto(Entity entity, WorldModel world,
       Point destPos)
    {
       int horiz = Integer.signum(destPos.x - entity.position.x);
@@ -514,8 +500,8 @@ final class Functions
 
       return newPos;
    }
-
-   public static Point nextPositionCrab(Entity entity, WorldModel world,
+*/
+ /*  public static Point nextPositionCrab(Entity entity, WorldModel world,
       Point destPos)
    {
       int horiz = Integer.signum(destPos.x - entity.position.x);
@@ -539,15 +525,15 @@ final class Functions
       }
 
       return newPos;
-   }
+   }*/
 
-   public static boolean adjacent(Point p1, Point p2)
+  /* public static boolean adjacent(Point p1, Point p2)
    {
       return (p1.x == p2.x && Math.abs(p1.y - p2.y) == 1) ||
          (p1.y == p2.y && Math.abs(p1.x - p2.x) == 1);
-   }
+   }*/
 
-   public static Optional<Point> findOpenAround(WorldModel world, Point pos)
+ /*  public static Optional<Point> findOpenAround(WorldModel world, Point pos)
    {
       for (int dy = -FISH_REACH; dy <= FISH_REACH; dy++)
       {
@@ -563,9 +549,9 @@ final class Functions
       }
 
       return Optional.empty();
-   }
+   }*/
 
-   public static void scheduleEvent(EventScheduler scheduler,
+/*   public static void scheduleEvent(EventScheduler scheduler,
       Entity entity, Action action, long afterPeriod)
    {
       long time = System.currentTimeMillis() +
@@ -579,9 +565,9 @@ final class Functions
          new LinkedList<>());
       pending.add(event);
       scheduler.pendingEvents.put(entity, pending);
-   }
+   }*/
 
-   public static void unscheduleAllEvents(EventScheduler scheduler,
+ /*  public static void unscheduleAllEvents(EventScheduler scheduler,
       Entity entity)
    {
       List<Event> pending = scheduler.pendingEvents.remove(entity);
@@ -594,8 +580,8 @@ final class Functions
          }
       }
    }
-
-   public static void removePendingEvent(EventScheduler scheduler,
+*/
+ /*  public static void removePendingEvent(EventScheduler scheduler,
       Event event)
    {
       List<Event> pending = scheduler.pendingEvents.get(event.entity);
@@ -604,27 +590,27 @@ final class Functions
       {
          pending.remove(event);
       }
-   }
+   }*/
 
-   public static void updateOnTime(EventScheduler scheduler, long time)
+ /*  public static void updateOnTime(EventScheduler scheduler, long time)
    {
       while (!scheduler.eventQueue.isEmpty() &&
          scheduler.eventQueue.peek().time < time)
       {
          Event next = scheduler.eventQueue.poll();
          
-         removePendingEvent(scheduler, next);
+         scheduler.removePendingEvent(next);
          
          executeAction(next.action, scheduler);
       }
-   }
+   }*/
 
-   public static List<PImage> getImageList(ImageStore imageStore, String key)
+  /* public static List<PImage> getImageList(ImageStore imageStore, String key)
    {
       return imageStore.images.getOrDefault(key, imageStore.defaultImages);
    }
-
-   public static void loadImages(Scanner in, ImageStore imageStore,
+*/
+ /*  public static void loadImages(Scanner in, ImageStore imageStore,
       PApplet screen)
    {
       int lineNumber = 0;
@@ -641,9 +627,9 @@ final class Functions
          }
          lineNumber++;
       }
-   }
+   }*/
 
-   public static void processImageLine(Map<String, List<PImage>> images,
+  /* public static void processImageLine(Map<String, List<PImage>> images,
       String line, PApplet screen)
    {
       String[] attrs = line.split("\\s");
@@ -665,9 +651,9 @@ final class Functions
             }
          }
       }
-   }
+   }*/
 
-   public static List<PImage> getImages(Map<String, List<PImage>> images,
+/*   public static List<PImage> getImages(Map<String, List<PImage>> images,
       String key)
    {
       List<PImage> imgs = images.get(key);
@@ -677,13 +663,13 @@ final class Functions
          images.put(key, imgs);
       }
       return imgs;
-   }
+   }*/
 
    /*
      Called with color for which alpha should be set and alpha value.
      setAlpha(img, color(255, 255, 255), 0));
    */
-   public static void setAlpha(PImage img, int maskColor, int alpha)
+  /* public static void setAlpha(PImage img, int maskColor, int alpha)
    {
       int alphaValue = alpha << 24;
       int nonAlpha = maskColor & COLOR_MASK;
@@ -697,21 +683,21 @@ final class Functions
          }
       }
       img.updatePixels();
-   }
+   }*/
 
-   public static void shift(Viewport viewport, int col, int row)
+ /*  public static void shift(Viewport viewport, int col, int row)
    {
       viewport.col = col;
       viewport.row = row;
-   }
+   }*/
 
-   public static boolean contains(Viewport viewport, Point p)
+ /*  public static boolean contains(Viewport viewport, Point p)
    {
       return p.y >= viewport.row && p.y < viewport.row + viewport.numRows &&
          p.x >= viewport.col && p.x < viewport.col + viewport.numCols;
-   }
+   }*/
 
-   public static void load(Scanner in, WorldModel world, ImageStore imageStore)
+  /* public static void load(Scanner in, WorldModel world, ImageStore imageStore)
    {
       int lineNumber = 0;
       while (in.hasNextLine())
@@ -736,9 +722,9 @@ final class Functions
          }
          lineNumber++;
       }
-   }
+   }*/
 
-   public static boolean processLine(String line, WorldModel world,
+  /* public static boolean processLine(String line, WorldModel world,
       ImageStore imageStore)
    {
       String[] properties = line.split("\\s");
@@ -762,9 +748,9 @@ final class Functions
       }
 
       return false;
-   }
+   }*/
 
-   public static boolean parseBackground(String [] properties,
+  /* public static boolean parseBackground(String [] properties,
       WorldModel world, ImageStore imageStore)
    {
       if (properties.length == BGND_NUM_PROPERTIES)
@@ -778,8 +764,8 @@ final class Functions
 
       return properties.length == BGND_NUM_PROPERTIES;
    }
-
-   public static boolean parseOcto(String [] properties, WorldModel world,
+*/
+   /*public static boolean parseOcto(String [] properties, WorldModel world,
       ImageStore imageStore)
    {
       if (properties.length == OCTO_NUM_PROPERTIES)
@@ -796,9 +782,9 @@ final class Functions
       }
 
       return properties.length == OCTO_NUM_PROPERTIES;
-   }
+   }*/
 
-   public static boolean parseObstacle(String [] properties, WorldModel world,
+   /*public static boolean parseObstacle(String [] properties, WorldModel world,
       ImageStore imageStore)
    {
       if (properties.length == OBSTACLE_NUM_PROPERTIES)
@@ -812,9 +798,9 @@ final class Functions
       }
 
       return properties.length == OBSTACLE_NUM_PROPERTIES;
-   }
+   }*/
 
-   public static boolean parseFish(String [] properties, WorldModel world,
+   /*public static boolean parseFish(String [] properties, WorldModel world,
       ImageStore imageStore)
    {
       if (properties.length == FISH_NUM_PROPERTIES)
@@ -828,9 +814,9 @@ final class Functions
       }
 
       return properties.length == FISH_NUM_PROPERTIES;
-   }
+   }*/
 
-   public static boolean parseAtlantis(String [] properties, WorldModel world,
+ /*  public static boolean parseAtlantis(String [] properties, WorldModel world,
       ImageStore imageStore)
    {
       if (properties.length == ATLANTIS_NUM_PROPERTIES)
@@ -844,8 +830,8 @@ final class Functions
 
       return properties.length == ATLANTIS_NUM_PROPERTIES;
    }
-
-   public static boolean parseSgrass(String [] properties, WorldModel world,
+*/
+  /* public static boolean parseSgrass(String [] properties, WorldModel world,
       ImageStore imageStore)
    {
       if (properties.length == SGRASS_NUM_PROPERTIES)
@@ -860,9 +846,9 @@ final class Functions
       }
 
       return properties.length == SGRASS_NUM_PROPERTIES;
-   }
+   }*/
 
-   public static void tryAddEntity(WorldModel world, Entity entity)
+  /* public static void tryAddEntity(WorldModel world, Entity entity)
    {
       if (isOccupied(world, entity.position))
       {
@@ -872,21 +858,21 @@ final class Functions
       }
 
       addEntity(world, entity);
-   }
+   }*/
 
-   public static boolean withinBounds(WorldModel world, Point pos)
+ /*  public static boolean withinBounds(WorldModel world, Point pos)
    {
       return pos.y >= 0 && pos.y < world.numRows &&
          pos.x >= 0 && pos.x < world.numCols;
    }
-
-   public static boolean isOccupied(WorldModel world, Point pos)
+*/
+/*   public static boolean isOccupied(WorldModel world, Point pos)
    {
       return withinBounds(world, pos) &&
          getOccupancyCell(world, pos) != null;
-   }
+   }*/
 
-   public static Optional<Entity> nearestEntity(List<Entity> entities,
+ /*  public static Optional<Entity> nearestEntity(List<Entity> entities,
       Point pos)
    {
       if (entities.isEmpty())
@@ -912,16 +898,16 @@ final class Functions
          return Optional.of(nearest);
       }
    }
-
-   public static int distanceSquared(Point p1, Point p2)
+*/
+/*   public static int distanceSquared(Point p1, Point p2)
    {
       int deltaX = p1.x - p2.x;
       int deltaY = p1.y - p2.y;
 
       return deltaX * deltaX + deltaY * deltaY;
-   }
+   }*/
 
-   public static Optional<Entity> findNearest(WorldModel world, Point pos,
+   /*public static Optional<Entity> findNearest(WorldModel world, Point pos,
       EntityKind kind)
    {
       List<Entity> ofType = new LinkedList<>();
@@ -935,21 +921,21 @@ final class Functions
 
       return nearestEntity(ofType, pos);
    }
-
+*/
    /*
       Assumes that there is no entity currently occupying the
       intended destination cell.
    */
-   public static void addEntity(WorldModel world, Entity entity)
+ /*  public static void addEntity(WorldModel world, Entity entity)
    {
       if (withinBounds(world, entity.position))
       {
          setOccupancyCell(world, entity.position, entity);
          world.entities.add(entity);
       }
-   }
+   }*/
 
-   public static void moveEntity(WorldModel world, Entity entity, Point pos)
+ /*  public static void moveEntity(WorldModel world, Entity entity, Point pos)
    {
       Point oldPos = entity.position;
       if (withinBounds(world, pos) && !pos.equals(oldPos))
@@ -959,14 +945,14 @@ final class Functions
          setOccupancyCell(world, pos, entity);
          entity.position = pos;
       }
-   }
+   }*/
 
-   public static void removeEntity(WorldModel world, Entity entity)
+  /* public static void removeEntity(WorldModel world, Entity entity)
    {
       removeEntityAt(world, entity.position);
-   }
+   }*/
 
-   public static void removeEntityAt(WorldModel world, Point pos)
+  /* public static void removeEntityAt(WorldModel world, Point pos)
    {
       if (withinBounds(world, pos)
          && getOccupancyCell(world, pos) != null)
@@ -975,13 +961,13 @@ final class Functions
 
          /* this moves the entity just outside of the grid for
             debugging purposes */
-         entity.position = new Point(-1, -1);
+    /*     entity.position = new Point(-1, -1);
          world.entities.remove(entity);
          setOccupancyCell(world, pos, null);
       }
-   }
+   }*/
 
-   public static Optional<PImage> getBackgroundImage(WorldModel world,
+  /* public static Optional<PImage> getBackgroundImage(WorldModel world,
       Point pos)
    {
       if (withinBounds(world, pos))
@@ -992,9 +978,9 @@ final class Functions
       {
          return Optional.empty();
       }
-   }
+   }*/
 
-   public static void setBackground(WorldModel world, Point pos,
+  /* public static void setBackground(WorldModel world, Point pos,
       Background background)
    {
       if (withinBounds(world, pos))
@@ -1002,8 +988,8 @@ final class Functions
          setBackgroundCell(world, pos, background);
       }
    }
-
-   public static Optional<Entity> getOccupant(WorldModel world, Point pos)
+*/
+   /*public static Optional<Entity> getOccupant(WorldModel world, Point pos)
    {
       if (isOccupied(world, pos))
       {
@@ -1013,20 +999,20 @@ final class Functions
       {
          return Optional.empty();
       }
-   }
+   }*/
 
-   public static Entity getOccupancyCell(WorldModel world, Point pos)
+   /*public static Entity getOccupancyCell(WorldModel world, Point pos)
    {
       return world.occupancy[pos.y][pos.x];
    }
-
-   public static void setOccupancyCell(WorldModel world, Point pos,
+*/
+ /*  public static void setOccupancyCell(WorldModel world, Point pos,
       Entity entity)
    {
       world.occupancy[pos.y][pos.x] = entity;
-   }
+   }*/
 
-   public static Background getBackgroundCell(WorldModel world, Point pos)
+/*   public static Background getBackgroundCell(WorldModel world, Point pos)
    {
       return world.background[pos.y][pos.x];
    }
@@ -1035,9 +1021,9 @@ final class Functions
       Background background)
    {
       world.background[pos.y][pos.x] = background;
-   }
+   }*/
 
-   public static Point viewportToWorld(Viewport viewport, int col, int row)
+  /* public static Point viewportToWorld(Viewport viewport, int col, int row)
    {
       return new Point(col + viewport.col, row + viewport.row);
    }
@@ -1045,14 +1031,14 @@ final class Functions
    public static Point worldToViewport(Viewport viewport, int col, int row)
    {
       return new Point(col - viewport.col, row - viewport.row);
-   }
+   }*/
 
-   public static int clamp(int value, int low, int high)
+ /*  public static int clamp(int value, int low, int high)
    {
       return Math.min(high, Math.max(value, low));
-   }
+   }*/
 
-   public static void shiftView(WorldView view, int colDelta, int rowDelta)
+  /* public static void shiftView(WorldView view, int colDelta, int rowDelta)
    {
       int newCol = clamp(view.viewport.col + colDelta, 0,
          view.world.numCols - view.viewport.numCols);
@@ -1060,9 +1046,9 @@ final class Functions
          view.world.numRows - view.viewport.numRows);
 
       shift(view.viewport, newCol, newRow);
-   }
+   }*/
 
-   public static void drawBackground(WorldView view)
+   /*public static void drawBackground(WorldView view)
    {
       for (int row = 0; row < view.viewport.numRows; row++)
       {
@@ -1078,9 +1064,9 @@ final class Functions
             }
          }
       }
-   }
+   }*/
 
-   public static void drawEntities(WorldView view)
+ /*  public static void drawEntities(WorldView view)
    {
       for (Entity entity : view.world.entities)
       {
@@ -1093,26 +1079,26 @@ final class Functions
                viewPoint.x * view.tileWidth, viewPoint.y * view.tileHeight);
          }
       }
-   }
+   }*/
 
-   public static void drawViewport(WorldView view)
+ /*  public static void drawViewport(WorldView view)
    {
-      drawBackground(view);
+      view.drawBackground();
       drawEntities(view);
-   }
+   }*/
 
-   public static Action createAnimationAction(Entity entity, int repeatCount)
+  /* public static Action createAnimationAction(Entity entity, int repeatCount)
    {
       return new Action(ActionKind.ANIMATION, entity, null, null, repeatCount);
    }
-
-   public static Action createActivityAction(Entity entity, WorldModel world,
+*/
+/*   public static Action createActivityAction(Entity entity, WorldModel world,
       ImageStore imageStore)
    {
       return new Action(ActionKind.ACTIVITY, entity, world, imageStore, 0);
-   }
+   }*/
 
-   public static Entity createAtlantis(String id, Point position,
+  /* public static Entity createAtlantis(String id, Point position,
       List<PImage> images)
    {
       return new Entity(EntityKind.ATLANTIS, id, position, images,
@@ -1168,4 +1154,4 @@ final class Functions
       return new Entity(EntityKind.SGRASS, id, position, images, 0, 0,
          actionPeriod, 0);
    }
-}
+}*/
