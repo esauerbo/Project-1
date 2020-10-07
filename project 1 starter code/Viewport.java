@@ -11,7 +11,7 @@ final class Viewport
 {
    public static final int PROPERTY_KEY = 0;
 
-   public static final int COLOR_MASK = 0xffffff;
+
    public int row;
    public int col;
    public int numRows;

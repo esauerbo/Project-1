@@ -9,13 +9,13 @@ in terms of entities and background elements
 
 final class WorldModel
 {
-   public static final String BGND_KEY = "background";
+   private static final String BGND_KEY = "background";
 
 
    public int numRows;
    public int numCols;
-   public Background background[][];
-   public Entity occupancy[][];
+   private Background background[][];
+   private Entity occupancy[][];
    public Set<Entity> entities;
 
    public WorldModel(int numRows, int numCols, Background defaultBackground)

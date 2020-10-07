@@ -1,34 +1,35 @@
 --Action--
-
---EventScheduler--
 executeAction
 executeAnimationAction
 executeActivityAction
-(The three functions listed above were moved to EventScheduler because the EventScheduler class regulates what
-actions are occuring. These functions execute, or call, the actions.)
+(The three functions listed above were moved to Action because the Action regulates what the entities do in
+the virtual world. When an action is occurring, the Action class should be controlling it.)
 
+--EventScheduler--
 scheduleActions
 scheduleEvent
 unscheduleAllEvents
 removePendingEvents
-(EventScheduler regulates and schedules actions)
+(EventScheduler regulates and schedules actions, so these functions clearly belong in EventScheduler.)
 
 transformNotFull
 transformFull
-moveToFull
 moveToNotFull
-(These functions involve moving and transforming the entities. They take the eventSchedueler as a paramter
-so they were moved to this class. Event scheduler is supposed to control what is happening in the virtual
-world, so these functions were moved there.)
+moveToFull
+(It wasn't immediately clear what these methods do. However they involve the organization and movement of
+entities. I put them in EventScheduler because it broadly controls what is happening in the world.)
+
 
 
 --WorldModel--
 moveToCrab
 (This function was moved to WorldModel because WorldModel regulates where entities are in relation to one
 another.)
+
 load
 processLine
-(Both of these functions took WorldModel as a parameter so were moved to the class)
+(Both of these functions were somewhat ambigous. Howeve they took WorldModel as a parameter so were moved to the class.
+Additionally these functions involve determining what is part of the world, and WorldModel keeps track of what is in the world.)
 
 findOpenAronud
 (Moved to WorldModel because this function deals with the entities inside the world.)
@@ -39,8 +40,6 @@ getCurrentImage
 nearestEntity
 (Moved to WorldModel because it deals with the entities in the world.)
 keys for entities: world model
-
-
 
 
 
@@ -59,6 +58,9 @@ nextPositionOcto
 nextPositionCrab
 (Both moved to Entity class because the functions deal with the behavior of specific entities.)
 
+createAnimationAction
+(This function was somewhat abmiguous. However I moved it to Entity because it involves the behavior of entities.)
+
 
 --Point--
 adjacent
@@ -70,9 +72,18 @@ getImageList
 loadImages
 processImageLine
 getImages
-(These functions were all moved to
+(These functions were all moved to ImageStore because they involve the collection and processing of images used in the
+game. ImageStore keeps track of them.)
 
 
---Viewport--
-setAlpha
+--VirtualWorld--
+parseBackground
+parseOcto
+parseObstacle
+parseFish
+parseAtlantis
+parseSgrass
+(These functions were difficult to place. VirtualWorld already contained a the function parseCommandLine which implied
+that it would be involved in parsing. VirtualWorld largely deals with the data involved in the game, so it made sense
+to include parsing, or data processing, in this class.)
 

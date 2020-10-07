@@ -9,15 +9,15 @@ ImageStore: to ideally keep track of the images used in our virtual world
 
 final class ImageStore
 {
-   public static final int COLOR_MASK = 0xffffff;
+   private static final int COLOR_MASK = 0xffffff;
 
-   public static final int KEYED_IMAGE_MIN = 5;
+   private static final int KEYED_IMAGE_MIN = 5;
    private static final int KEYED_RED_IDX = 2;
    private static final int KEYED_GREEN_IDX = 3;
    private static final int KEYED_BLUE_IDX = 4;
 
-   public Map<String, List<PImage>> images;
-   public List<PImage> defaultImages;
+   private Map<String, List<PImage>> images;
+   private List<PImage> defaultImages;
 
    public ImageStore(PImage defaultImage)
    {

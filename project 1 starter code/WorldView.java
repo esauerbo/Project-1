@@ -12,13 +12,13 @@ that we can see based on the viewport
 
 final class WorldView
 {
-   private static final Random rand = new Random();
+   public static final Random rand = new Random();
 
    private PApplet screen;
    public WorldModel world;
-   public int tileWidth;
-   public int tileHeight;
-   public Viewport viewport;
+   private int tileWidth;
+   private int tileHeight;
+   private Viewport viewport;
 
    public WorldView(int numRows, int numCols, PApplet screen, WorldModel world,
       int tileWidth, int tileHeight)

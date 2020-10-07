@@ -4,11 +4,11 @@ Action: ideally what our various entities might do in our virutal world
 
 final class Action
 {
-   public ActionKind kind;
+   private ActionKind kind;
    public Entity entity;
    public WorldModel world;
    public ImageStore imageStore;
-   public int repeatCount;
+   private int repeatCount;
 
    public Action(ActionKind kind, Entity entity, WorldModel world,
       ImageStore imageStore, int repeatCount)
