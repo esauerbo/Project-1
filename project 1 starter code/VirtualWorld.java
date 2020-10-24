@@ -47,8 +47,8 @@ public final class VirtualWorld
 
    private static double timeScale = 1.0;
 
-   public ImageStore imageStore;
-   public WorldModel world;
+   private ImageStore imageStore;
+   private WorldModel world;
    private WorldView view;
    private EventScheduler scheduler;
 
@@ -59,9 +59,6 @@ public final class VirtualWorld
       size(VIEW_WIDTH, VIEW_HEIGHT);
    }
 
-   /*
-      Processing entry point for "sketch" setup.
-   */
    public void setup()
    {
       this.imageStore = new ImageStore(
@@ -164,14 +161,13 @@ public final class VirtualWorld
       }
    }
 
-   private static void scheduleActions(WorldModel world,
-      EventScheduler scheduler, ImageStore imageStore)
+   public static void scheduleActions(WorldModel world,
+                                      EventScheduler scheduler, ImageStore imageStore)
    {
-      for (Entity entity : world.entities)
-      {
-         //Only start actions for entities that include action (not those with just animations)
-         if (entity.actionPeriod > 0)
-            entity.scheduleActions(scheduler, world, imageStore);
+      for (Entity entity : world.getEntities()) {
+         if (entity instanceof Actioned) {
+            ((Actioned) entity).scheduleActions(scheduler, world, imageStore);
+         }
       }
    }
 
@@ -194,7 +190,7 @@ public final class VirtualWorld
       }
    }
 
-   public static boolean parseBackground(String [] properties,
+  /* public static boolean parseBackground(String [] properties,
                                          WorldModel world, ImageStore imageStore)
    {
       if (properties.length == BGND_NUM_PROPERTIES)
@@ -290,7 +286,7 @@ public final class VirtualWorld
       }
 
       return properties.length == Entity.SGRASS_NUM_PROPERTIES;
-   }
+   }*/
 
 
 
