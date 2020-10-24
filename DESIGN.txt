@@ -12,10 +12,6 @@ unscheduleAllEvents
 removePendingEvents
 (EventScheduler regulates and schedules actions, so these functions clearly belong in EventScheduler.)
 
-transformNotFull
-transformFull
-moveToNotFull
-moveToFull
 (It wasn't immediately clear what these methods do. However they involve the organization and movement of
 entities. I put them in EventScheduler because it broadly controls what is happening in the world.)
 
@@ -23,9 +19,6 @@ entities. I put them in EventScheduler because it broadly controls what is happe
 
 --WorldModel--
 moveToCrab
-(This function was moved to WorldModel because WorldModel regulates where entities are in relation to one
-another.)
-
 load
 processLine
 (Both of these functions were somewhat ambigous. Howeve they took WorldModel as a parameter so were moved to the class.
@@ -53,6 +46,15 @@ executeAtlantisActivity
 executeSgrassActivity
 (The above functions were all moved to the class Entity. Entity regulates what each entity is doing at any given
 point in time, so it will be in charge of executing the activities of the indiviudal objects.)
+scheduleActions
+getCurrentImage
+transformNotFull
+transformFull
+moveToNotFull
+moveToFull
+
+(This function was moved to WorldModel because WorldModel regulates where entities are in relation to one
+another.)
 
 nextPositionOcto
 nextPositionCrab

@@ -32,24 +32,6 @@ final class WorldModel
       }
    }
 
-   public PImage getCurrentImage(Object entity)
-   {
-      if (entity instanceof Background)
-      {
-         return ((Background)entity).images
-                 .get(((Background)entity).imageIndex);
-      }
-      else if (entity instanceof Entity)
-      {
-         return ((Entity)entity).images.get(((Entity)entity).imageIndex);
-      }
-      else
-      {
-         throw new UnsupportedOperationException(
-                 String.format("getCurrentImage not supported for %s",
-                         entity));
-      }
-   }
 
    public boolean moveToCrab(Entity crab, Entity target, EventScheduler scheduler)
    {
@@ -256,7 +238,7 @@ final class WorldModel
    {
       if (this.withinBounds(pos))
       {
-         return Optional.of(getCurrentImage(this.getBackgroundCell(pos)));
+         return Optional.of(Entity.getCurrentImage(this.getBackgroundCell(pos)));
       }
       else
       {
