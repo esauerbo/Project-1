@@ -8,9 +8,46 @@ Entity ideally would includes functions for how all the entities in our virtual 
  */
 
 
-final class Entity
+public abstract class Entity
 {
-   public static final String OCTO_KEY = "octo";
+
+    private Point position;
+    private List<PImage> images;
+    private int imageIndex;
+    private int actionPeriod;
+    private int animationPeriod;
+    private String id;
+
+    public Entity( String id, Point position,
+                   List<PImage> images, int actionPeriod, int animationPeriod)
+    {
+        this.id=id;
+        this.position = position;
+        this.images = images;
+        this.imageIndex = 0;
+        this.actionPeriod = actionPeriod;
+        this.animationPeriod = animationPeriod;
+    }
+
+    /*-----------Getters-----------*/
+    public int getActionPeriod(){ return actionPeriod; }
+    public List<PImage> getImages() { return this.images; }
+    int getImageIndex(){ return imageIndex; }
+    public Point getPosition() { return this.position;}
+    public int getAnimationPeriod() { return animationPeriod; }
+    public String getId(){ return id; }
+
+    /*----------Setters----------*/
+    public void setPosition(Point p) { this.position = p; }
+
+    /*--------Methods----------*/
+    public void nextImage()
+    {
+        this.imageIndex = (this.getImageIndex()+ 1) % this.getImages().size();
+    }
+
+
+  /* public static final String OCTO_KEY = "octo";
    public static final int OCTO_NUM_PROPERTIES = 7;
    public static final int OCTO_ID = 1;
    public static final int OCTO_COL = 2;
@@ -109,7 +146,7 @@ final class Entity
       this.imageIndex = (this.imageIndex + 1) % this.images.size();
    }
 
-   public void executeOctoFullActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+  /* public void executeOctoFullActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
    {
       Optional<Entity> fullTarget = world.findNearest(this.position,
               EntityKind.ATLANTIS);
@@ -129,9 +166,9 @@ final class Entity
                  world.createActivityAction(this, imageStore),
                  this.actionPeriod);
       }
-   }
+   }*/
 
-   public void executeOctoNotFullActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+ /*  public void executeOctoNotFullActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
    {
       Optional<Entity> notFullTarget = world.findNearest(this.position,
               EntityKind.FISH);
@@ -144,9 +181,9 @@ final class Entity
                  world.createActivityAction(this, imageStore),
                  this.actionPeriod);
       }
-   }
+   }*/
 
-   public void executeFishActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+ /*  public void executeFishActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
    {
       Point pos = this.position;  // store current position before removing
 
@@ -267,10 +304,6 @@ final class Entity
    }
 
 
-   public Action createAnimationAction(int repeatCount)
-   {
-      return new Action(ActionKind.ANIMATION, this,null, null, repeatCount);
-   }
 
 
    public static PImage getCurrentImage(Object entity)
@@ -434,7 +467,7 @@ final class Entity
          }
          return false;
       }
-   }
+   }*/
 
 
 

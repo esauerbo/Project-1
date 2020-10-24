@@ -287,10 +287,7 @@ final class WorldModel
       this.background[pos.y][pos.x] = background;
    }
 
-   public Action createActivityAction(Entity entity, ImageStore imageStore)
-   {
-      return new Action(ActionKind.ACTIVITY, entity, this, imageStore, 0);
-   }
+
 
 
 
