@@ -66,7 +66,7 @@ final class WorldView
    {
       for (Entity entity : this.world.entities)
       {
-         Point pos = entity.position;
+         Point pos = entity.getPosition();
 
          if (this.viewport.contains(pos))
          {
@@ -83,14 +83,14 @@ final class WorldView
       this.drawEntities();
    }
 
-   public static Entity createAtlantis(String id, Point position,
+  /* public static Entity createAtlantis(String id, Point position,
                                        List<PImage> images)
    {
-      return new Entity(EntityKind.ATLANTIS, id, position, images,
+      return new Atlantis(EntityKind.ATLANTIS, id, position, images,
               0, 0, 0, 0);
-   }
+   }*/
 
-   public static Entity createOctoFull(String id, int resourceLimit,
+   /*public static Entity createOctoFull(String id, int resourceLimit,
                                        Point position, int actionPeriod, int animationPeriod,
                                        List<PImage> images)
    {
@@ -104,39 +104,41 @@ final class WorldView
    {
       return new Entity(EntityKind.OCTO_NOT_FULL, id, position, images,
               resourceLimit, 0, actionPeriod, animationPeriod);
-   }
+   }*/
 
-   public static Entity createObstacle(String id, Point position,
+  /* public static Entity createObstacle(String id, Point position,
                                        List<PImage> images)
    {
       return new Entity(EntityKind.OBSTACLE, id, position, images,
               0, 0, 0, 0);
    }
+*/
 
-   public static Entity createFish(String id, Point position, int actionPeriod,
+ /*  public static Entity createFish(String id, Point position, int actionPeriod,
                                    List<PImage> images)
    {
       return new Entity(EntityKind.FISH, id, position, images, 0, 0,
               actionPeriod, 0);
-   }
+   }*/
 
-   public static Entity createCrab(String id, Point position,
+ /*  public static Entity createCrab(String id, Point position,
                                    int actionPeriod, int animationPeriod, List<PImage> images)
    {
       return new Entity(EntityKind.CRAB, id, position, images,
               0, 0, actionPeriod, animationPeriod);
-   }
+   }*/
 
-   public static Entity createQuake(Point position, List<PImage> images)
+ /*  public static Entity createQuake(Point position, List<PImage> images)
    {
       return new Entity(EntityKind.QUAKE, Entity.QUAKE_ID, position, images,
               0, 0, Entity.QUAKE_ACTION_PERIOD, Entity.QUAKE_ANIMATION_PERIOD);
    }
+*/
 
-   public static Entity createSgrass(String id, Point position, int actionPeriod,
+  /* public static Entity createSgrass(String id, Point position, int actionPeriod,
                                      List<PImage> images)
    {
       return new Entity(EntityKind.SGRASS, id, position, images, 0, 0,
               actionPeriod, 0);
-   }
+   }*/
 }

@@ -49,47 +49,47 @@ final class Action
 
    public void executeActivityAction(EventScheduler scheduler)
    {
-      switch (this.entity.kind)
+      switch (this.entity.getKind())
       {
          case OCTO_FULL:
-            this.entity.executeOctoFullActivity(this.world,
+            ((Octo)this.entity).executeOctoFullActivity(this.world,
                     this.imageStore, scheduler);
             break;
 
          case OCTO_NOT_FULL:
-            this.entity.executeOctoNotFullActivity(this.world,
+            ((Octo)this.entity).executeOctoNotFullActivity(this.world,
                     this.imageStore, scheduler);
             break;
 
          case FISH:
-            this.entity.executeFishActivity(this.world, this.imageStore,
+            ((Fish)this.entity).executeFishActivity(this.world, this.imageStore,
                     scheduler);
             break;
 
          case CRAB:
-            this.entity.executeCrabActivity(this.world,
+            ((Crab)this.entity).executeCrabActivity(this.world,
                     this.imageStore, scheduler);
             break;
 
          case QUAKE:
-            this.entity.executeQuakeActivity(this.world, this.imageStore,
+            ((Quake)this.entity).executeQuakeActivity(this.world, this.imageStore,
                     scheduler);
             break;
 
          case SGRASS:
-            this.entity.executeSgrassActivity(this.world, this.imageStore,
+            ((SGrass)this.entity).executeSgrassActivity(this.world, this.imageStore,
                     scheduler);
             break;
 
          case ATLANTIS:
-            this.entity.executeAtlantisActivity(this.world, this.imageStore,
+            ((Atlantis)this.entity).executeAtlantisActivity(this.world, this.imageStore,
                     scheduler);
             break;
 
          default:
             throw new UnsupportedOperationException(
                     String.format("executeActivityAction not supported for %s",
-                            this.entity.kind));
+                            this.entity.getKind()));
       }
    }
 

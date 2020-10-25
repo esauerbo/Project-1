@@ -170,7 +170,7 @@ public final class VirtualWorld
       for (Entity entity : world.entities)
       {
          //Only start actions for entities that include action (not those with just animations)
-         if (entity.actionPeriod > 0)
+         if (entity.getActionPeriod() > 0)
             entity.scheduleActions(scheduler, world, imageStore);
       }
    }
@@ -212,84 +212,84 @@ public final class VirtualWorld
    public static boolean parseOcto(String [] properties, WorldModel world,
                                    ImageStore imageStore)
    {
-      if (properties.length == Entity.OCTO_NUM_PROPERTIES)
+      if (properties.length == Octo.OCTO_NUM_PROPERTIES)
       {
-         Point pt = new Point(Integer.parseInt(properties[Entity.OCTO_COL]),
-                 Integer.parseInt(properties[Entity.OCTO_ROW]));
-         Entity entity = WorldView.createOctoNotFull(properties[Entity.OCTO_ID],
-                 Integer.parseInt(properties[Entity.OCTO_LIMIT]),
+         Point pt = new Point(Integer.parseInt(properties[Octo.OCTO_COL]),
+                 Integer.parseInt(properties[Octo.OCTO_ROW]));
+         Entity entity = Octo.createOctoNotFull(properties[Octo.OCTO_ID],
+                 Integer.parseInt(properties[Octo.OCTO_LIMIT]),
                  pt,
-                 Integer.parseInt(properties[Entity.OCTO_ACTION_PERIOD]),
-                 Integer.parseInt(properties[Entity.OCTO_ANIMATION_PERIOD]),
-                 imageStore.getImageList(Entity.OCTO_KEY));
+                 Integer.parseInt(properties[Octo.OCTO_ACTION_PERIOD]),
+                 Integer.parseInt(properties[Octo.OCTO_ANIMATION_PERIOD]),
+                 imageStore.getImageList(Octo.OCTO_KEY));
          world.tryAddEntity(entity);
       }
 
-      return properties.length == Entity.OCTO_NUM_PROPERTIES;
+      return properties.length == Octo.OCTO_NUM_PROPERTIES;
    }
 
    public static boolean parseObstacle(String [] properties, WorldModel world,
                                        ImageStore imageStore)
    {
-      if (properties.length == Entity.OBSTACLE_NUM_PROPERTIES)
+      if (properties.length == Obstacle.OBSTACLE_NUM_PROPERTIES)
       {
          Point pt = new Point(
-                 Integer.parseInt(properties[Entity.OBSTACLE_COL]),
-                 Integer.parseInt(properties[Entity.OBSTACLE_ROW]));
-         Entity entity = WorldView.createObstacle(properties[Entity.OBSTACLE_ID],
-                 pt, imageStore.getImageList(Entity.OBSTACLE_KEY));
+                 Integer.parseInt(properties[Obstacle.OBSTACLE_COL]),
+                 Integer.parseInt(properties[Obstacle.OBSTACLE_ROW]));
+         Entity entity = Obstacle.createObstacle(properties[Obstacle.OBSTACLE_ID],
+                 pt, imageStore.getImageList(Obstacle.OBSTACLE_KEY));
          world.tryAddEntity(entity);
       }
 
-      return properties.length == Entity.OBSTACLE_NUM_PROPERTIES;
+      return properties.length == Obstacle.OBSTACLE_NUM_PROPERTIES;
    }
 
    public static boolean parseFish(String [] properties, WorldModel world,
                                    ImageStore imageStore)
    {
-      if (properties.length == Entity.FISH_NUM_PROPERTIES)
+      if (properties.length == Fish.FISH_NUM_PROPERTIES)
       {
-         Point pt = new Point(Integer.parseInt(properties[Entity.FISH_COL]),
-                 Integer.parseInt(properties[Entity.FISH_ROW]));
-         Entity entity = WorldView.createFish(properties[Entity.FISH_ID],
-                 pt, Integer.parseInt(properties[Entity.FISH_ACTION_PERIOD]),
-                 imageStore.getImageList(Entity.FISH_KEY));
+         Point pt = new Point(Integer.parseInt(properties[Fish.FISH_COL]),
+                 Integer.parseInt(properties[Fish.FISH_ROW]));
+         Entity entity = Fish.createFish(properties[Fish.FISH_ID],
+                 pt, Integer.parseInt(properties[Fish.FISH_ACTION_PERIOD]),
+                 imageStore.getImageList(Fish.FISH_KEY));
          world.tryAddEntity(entity);
       }
 
-      return properties.length == Entity.FISH_NUM_PROPERTIES;
+      return properties.length == Fish.FISH_NUM_PROPERTIES;
    }
 
    public static boolean parseAtlantis(String [] properties, WorldModel world,
                                        ImageStore imageStore)
    {
-      if (properties.length == Entity.ATLANTIS_NUM_PROPERTIES)
+      if (properties.length == Atlantis.ATLANTIS_NUM_PROPERTIES)
       {
-         Point pt = new Point(Integer.parseInt(properties[Entity.ATLANTIS_COL]),
-                 Integer.parseInt(properties[Entity.ATLANTIS_ROW]));
-         Entity entity = WorldView.createAtlantis(properties[Entity.ATLANTIS_ID],
-                 pt, imageStore.getImageList(Entity.ATLANTIS_KEY));
+         Point pt = new Point(Integer.parseInt(properties[Atlantis.ATLANTIS_COL]),
+                 Integer.parseInt(properties[Atlantis.ATLANTIS_ROW]));
+         Entity entity = Atlantis.createAtlantis(properties[Atlantis.ATLANTIS_ID],
+                 pt, imageStore.getImageList(Atlantis.ATLANTIS_KEY));
          world.tryAddEntity(entity);
       }
 
-      return properties.length == Entity.ATLANTIS_NUM_PROPERTIES;
+      return properties.length == Atlantis.ATLANTIS_NUM_PROPERTIES;
    }
 
    public static boolean parseSgrass(String [] properties, WorldModel world,
                                      ImageStore imageStore)
    {
-      if (properties.length == Entity.SGRASS_NUM_PROPERTIES)
+      if (properties.length == SGrass.SGRASS_NUM_PROPERTIES)
       {
-         Point pt = new Point(Integer.parseInt(properties[Entity.SGRASS_COL]),
-                 Integer.parseInt(properties[Entity.SGRASS_ROW]));
-         Entity entity = WorldView.createSgrass(properties[Entity.SGRASS_ID],
+         Point pt = new Point(Integer.parseInt(properties[SGrass.SGRASS_COL]),
+                 Integer.parseInt(properties[SGrass.SGRASS_ROW]));
+         Entity entity = SGrass.createSgrass(properties[SGrass.SGRASS_ID],
                  pt,
-                 Integer.parseInt(properties[Entity.SGRASS_ACTION_PERIOD]),
-                 imageStore.getImageList(Entity.SGRASS_KEY));
+                 Integer.parseInt(properties[SGrass.SGRASS_ACTION_PERIOD]),
+                 imageStore.getImageList(SGrass.SGRASS_KEY));
          world.tryAddEntity(entity);
       }
 
-      return properties.length == Entity.SGRASS_NUM_PROPERTIES;
+      return properties.length == SGrass.SGRASS_NUM_PROPERTIES;
    }
 
 

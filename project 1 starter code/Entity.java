@@ -18,59 +18,59 @@ public abstract class Entity
    public static final int OCTO_LIMIT = 4;
    public static final int OCTO_ACTION_PERIOD = 5;
    public static final int OCTO_ANIMATION_PERIOD = 6;*/
-   public static final String FISH_KEY = "fish";
+   /*public static final String FISH_KEY = "fish";
    public static final int FISH_NUM_PROPERTIES = 5;
    public static final int FISH_ID = 1;
    public static final int FISH_COL = 2;
    public static final int FISH_ROW = 3;
-   public static final int FISH_ACTION_PERIOD = 4;
-   public static final String ATLANTIS_KEY = "atlantis";
+   public static final int FISH_ACTION_PERIOD = 4;*/
+   /*public static final String ATLANTIS_KEY = "atlantis";
    public static final int ATLANTIS_NUM_PROPERTIES = 4;
    public static final int ATLANTIS_ID = 1;
    public static final int ATLANTIS_COL = 2;
    public static final int ATLANTIS_ROW = 3;
    public static final int ATLANTIS_ANIMATION_PERIOD = 70;
-   public static final int ATLANTIS_ANIMATION_REPEAT_COUNT = 7;
-   public static final String SGRASS_KEY = "seaGrass";
+   public static final int ATLANTIS_ANIMATION_REPEAT_COUNT = 7;*/
+  /* public static final String SGRASS_KEY = "seaGrass";
    public static final int SGRASS_NUM_PROPERTIES = 5;
    public static final int SGRASS_ID = 1;
    public static final int SGRASS_COL = 2;
    public static final int SGRASS_ROW = 3;
-   public static final int SGRASS_ACTION_PERIOD = 4;
-   public static final String QUAKE_KEY = "quake";
+   public static final int SGRASS_ACTION_PERIOD = 4;*/
+ /*  public static final String QUAKE_KEY = "quake";
    public static final String QUAKE_ID = "quake";
    public static final int QUAKE_ACTION_PERIOD = 1100;
    public static final int QUAKE_ANIMATION_PERIOD = 100;
    public static final int QUAKE_ANIMATION_REPEAT_COUNT = 10;
-
-   public static final String CRAB_KEY = "crab";
+*/
+  /* public static final String CRAB_KEY = "crab";
    public static final String CRAB_ID_SUFFIX = " -- crab";
    public static final int CRAB_PERIOD_SCALE = 4;
    public static final int CRAB_ANIMATION_MIN = 50;
-   public static final int CRAB_ANIMATION_MAX = 150;
+   public static final int CRAB_ANIMATION_MAX = 150;*/
 
-   public static final String FISH_ID_PREFIX = "fish -- ";
+ /*  public static final String FISH_ID_PREFIX = "fish -- ";
    public static final int FISH_CORRUPT_MIN = 20000;
    public static final int FISH_CORRUPT_MAX = 30000;
-   public static final int FISH_REACH = 1;
+   public static final int FISH_REACH = 1;*/
 
-   public static final String OBSTACLE_KEY = "obstacle";
+/*   public static final String OBSTACLE_KEY = "obstacle";
    public static final int OBSTACLE_NUM_PROPERTIES = 4;
    public static final int OBSTACLE_ID = 1;
    public static final int OBSTACLE_COL = 2;
-   public static final int OBSTACLE_ROW = 3;
+   public static final int OBSTACLE_ROW = 3;*/
 
 
 
-   public EntityKind kind;
-   public String id;
-   public Point position;
-   public List<PImage> images;
-   public int imageIndex;
-   public int resourceLimit;
-   public int resourceCount;
-   public int actionPeriod;
-   public int animationPeriod;
+    private EntityKind kind;
+    private String id;
+   private Point position;
+   private List<PImage> images;
+   private int imageIndex;
+    private int resourceLimit;
+    private int resourceCount;
+    private int actionPeriod;
+    private int animationPeriod;
 
    public Entity(EntityKind kind, String id, Point position,
       List<PImage> images, int resourceLimit, int resourceCount,
@@ -87,7 +87,40 @@ public abstract class Entity
       this.animationPeriod = animationPeriod;
    }
 
-   public int getAnimationPeriod()
+    public EntityKind getKind() {
+        return kind;
+    }
+    public String getId() {
+        return id;
+    }
+    public Point getPosition() {
+        return position;
+    }
+    public List<PImage> getImages() {
+        return images;
+    }
+    public int getImageIndex() {
+        return imageIndex;
+    }
+    public int getResourceLimit() {
+        return resourceLimit;
+    }
+    public int getResourceCount() {
+        return resourceCount;
+    }
+    public int getActionPeriod() {
+        return actionPeriod;
+    }
+
+    public void setResourceCount(int resourceCount) {
+        this.resourceCount = resourceCount;
+    }
+
+    public void setPosition(Point position) {
+        this.position = position;
+    }
+
+    public int getAnimationPeriod()
    {
       switch (this.kind)
       {
@@ -109,7 +142,7 @@ public abstract class Entity
       this.imageIndex = (this.imageIndex + 1) % this.images.size();
    }
 
-   public void executeOctoFullActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+  /* public void executeOctoFullActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
    {
       Optional<Entity> fullTarget = world.findNearest(this.position,
               EntityKind.ATLANTIS);
@@ -130,8 +163,8 @@ public abstract class Entity
                  this.actionPeriod);
       }
    }
-
-   public void executeOctoNotFullActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+*/
+  /* public void executeOctoNotFullActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
    {
       Optional<Entity> notFullTarget = world.findNearest(this.position,
               EntityKind.FISH);
@@ -144,9 +177,9 @@ public abstract class Entity
                  world.createActivityAction(this, imageStore),
                  this.actionPeriod);
       }
-   }
+   }*/
 
-   public void executeFishActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+ /* public void executeFishActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
    {
       Point pos = this.position;  // store current position before removing
 
@@ -161,9 +194,9 @@ public abstract class Entity
 
       world.addEntity(crab);
       crab.scheduleActions(scheduler, world, imageStore);
-   }
+   }*/
 
-   public void executeCrabActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+  /* public void executeCrabActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
    {
       Optional<Entity> crabTarget = world.findNearest(
               this.position, EntityKind.SGRASS);
@@ -187,7 +220,7 @@ public abstract class Entity
       scheduler.scheduleEvent(this,
               world.createActivityAction(this, imageStore),
               nextPeriod);
-   }
+   }*/
 
    public void executeQuakeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
    {
@@ -195,13 +228,13 @@ public abstract class Entity
       world.removeEntity(this);
    }
 
-   public void executeAtlantisActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+  /* public void executeAtlantisActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
    {
       scheduler.unscheduleAllEvents(this);
       world.removeEntity(this);
-   }
+   }*/
 
-   public void executeSgrassActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+   /*public void executeSgrassActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
    {
       Optional<Point> openPt = world.findOpenAround(this.position);
 
@@ -218,9 +251,9 @@ public abstract class Entity
       scheduler.scheduleEvent(this,
               world.createActivityAction(this, imageStore),
               this.actionPeriod);
-   }
+   }*/
 
-   public Point nextPositionOcto(WorldModel world, Point destPos)
+  /* public Point nextPositionOcto(WorldModel world, Point destPos)
    {
       int horiz = Integer.signum(destPos.x - this.position.x);
       Point newPos = new Point(this.position.x + horiz,
@@ -239,9 +272,9 @@ public abstract class Entity
       }
 
       return newPos;
-   }
+   }*/
 
-   public Point nextPositionCrab(WorldModel world, Point destPos)
+/*   public Point nextPositionCrab(WorldModel world, Point destPos)
    {
       int horiz = Integer.signum(destPos.x - this.position.x);
       Point newPos = new Point(this.position.x + horiz,
@@ -265,7 +298,7 @@ public abstract class Entity
 
       return newPos;
    }
-
+*/
 
    public Action createAnimationAction(int repeatCount)
    {
@@ -331,7 +364,7 @@ public abstract class Entity
                     world.createActivityAction(this, imageStore),
                     this.actionPeriod);
             scheduler.scheduleEvent(this,
-                    this.createAnimationAction(this.QUAKE_ANIMATION_REPEAT_COUNT),
+                    this.createAnimationAction(Quake.QUAKE_ANIMATION_REPEAT_COUNT),
                     this.getAnimationPeriod());
             break;
 
@@ -342,7 +375,7 @@ public abstract class Entity
             break;
          case ATLANTIS:
             scheduler.scheduleEvent(this,
-                    this.createAnimationAction(ATLANTIS_ANIMATION_REPEAT_COUNT),
+                    this.createAnimationAction(Atlantis.ATLANTIS_ANIMATION_REPEAT_COUNT),
                     this.getAnimationPeriod());
             break;
 
@@ -350,7 +383,7 @@ public abstract class Entity
       }
    }
 
-   public boolean transformNotFull(EventScheduler scheduler, WorldModel world, ImageStore imageStore)
+  /* public boolean transformNotFull(EventScheduler scheduler, WorldModel world, ImageStore imageStore)
    {
       if (this.resourceCount >= this.resourceLimit)
       {
@@ -368,9 +401,9 @@ public abstract class Entity
       }
 
       return false;
-   }
+   }*/
 
-   public void transformFull(EventScheduler scheduler, WorldModel world, ImageStore imageStore)
+  /* public void transformFull(EventScheduler scheduler, WorldModel world, ImageStore imageStore)
    {
       Entity octo = WorldView.createOctoNotFull(this.id, this.resourceLimit,
               this.position, this.actionPeriod, this.animationPeriod,
@@ -382,9 +415,9 @@ public abstract class Entity
       world.addEntity(octo);
       this.scheduleActions(scheduler, world, imageStore);
    }
+*/
 
-
-   public boolean moveToNotFull(EventScheduler scheduler, WorldModel world, Entity target)
+  /* public boolean moveToNotFull(EventScheduler scheduler, WorldModel world, Entity target)
    {
       if (this.position.adjacent(target.position))
       {
@@ -410,9 +443,9 @@ public abstract class Entity
          }
          return false;
       }
-   }
+   }*/
 
-   public boolean moveToFull(EventScheduler scheduler, WorldModel world, Entity target)
+  /* public boolean moveToFull(EventScheduler scheduler, WorldModel world, Entity target)
    {
       if (this.position.adjacent(target.position))
       {
@@ -434,20 +467,7 @@ public abstract class Entity
          }
          return false;
       }
-   }
-
-
-
-
-
-
-
-
-
-
-
-
-
+   }*/
 
 
 }

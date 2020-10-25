@@ -33,9 +33,9 @@ final class WorldModel
    }
 
 
-   public boolean moveToCrab(Entity crab, Entity target, EventScheduler scheduler)
+ /*  public boolean moveToCrab(Entity crab, Entity target, EventScheduler scheduler)
    {
-      if (crab.position.adjacent(target.position))
+      if (crab.getPosition().adjacent(target.getPosition()))
       {
          this.removeEntity(target);
          scheduler.unscheduleAllEvents(target);
@@ -43,7 +43,7 @@ final class WorldModel
       }
       else
       {
-         Point nextPos = crab.nextPositionCrab( this, target.position);
+         Point nextPos = crab.nextPositionCrab( this, target.getPosition());
 
          if (!crab.position.equals(nextPos))
          {
@@ -57,13 +57,13 @@ final class WorldModel
          }
          return false;
       }
-   }
+   }*/
 
    public Optional<Point> findOpenAround(Point pos)
    {
-      for (int dy = -Entity.FISH_REACH; dy <= Entity.FISH_REACH; dy++)
+      for (int dy = -Fish.FISH_REACH; dy <= Fish.FISH_REACH; dy++)
       {
-         for (int dx = -Entity.FISH_REACH; dx <= Entity.FISH_REACH; dx++)
+         for (int dx = -Fish.FISH_REACH; dx <= Fish.FISH_REACH; dx++)
          {
             Point newPt = new Point(pos.x + dx, pos.y + dy);
             if (this.withinBounds(newPt) &&
@@ -113,15 +113,15 @@ final class WorldModel
          {
             case BGND_KEY:
                return VirtualWorld.parseBackground(properties, this, imageStore);
-            case Entity.OCTO_KEY:
+            case Octo.OCTO_KEY:
                return VirtualWorld.parseOcto(properties, this, imageStore);
-            case Entity.OBSTACLE_KEY:
+            case Obstacle.OBSTACLE_KEY:
                return VirtualWorld.parseObstacle(properties, this, imageStore);
-            case Entity.FISH_KEY:
+            case Fish.FISH_KEY:
                return VirtualWorld.parseFish(properties, this, imageStore);
-            case Entity.ATLANTIS_KEY:
+            case Atlantis.ATLANTIS_KEY:
                return VirtualWorld.parseAtlantis(properties, this, imageStore);
-            case Entity.SGRASS_KEY:
+            case SGrass.SGRASS_KEY:
                return VirtualWorld.parseSgrass(properties, this, imageStore);
          }
       }
@@ -131,7 +131,7 @@ final class WorldModel
 
    public void tryAddEntity(Entity entity)
    {
-      if (this.isOccupied(entity.position))
+      if (this.isOccupied(entity.getPosition()))
       {
          // arguably the wrong type of exception, but we are not
          // defining our own exceptions yet
@@ -162,11 +162,11 @@ final class WorldModel
       else
       {
          Entity nearest = entities.get(0);
-         int nearestDistance = nearest.position.distanceSquared(pos);
+         int nearestDistance = nearest.getPosition().distanceSquared(pos);
 
          for (Entity other : entities)
          {
-            int otherDistance = other.position.distanceSquared(pos);
+            int otherDistance = other.getPosition().distanceSquared(pos);
 
             if (otherDistance < nearestDistance)
             {
@@ -184,7 +184,7 @@ final class WorldModel
       List<Entity> ofType = new LinkedList<>();
       for (Entity entity : this.entities)
       {
-         if (entity.kind == kind)
+         if (entity.getKind() == kind)
          {
             ofType.add(entity);
          }
@@ -195,28 +195,30 @@ final class WorldModel
 
    public void addEntity(Entity entity)
    {
-      if (this.withinBounds(entity.position))
+      if (this.withinBounds(entity.getPosition()))
       {
-         this.setOccupancyCell(entity.position, entity);
+         this.setOccupancyCell(entity.getPosition(), entity);
          this.entities.add(entity);
       }
    }
 
+
    public void moveEntity(Entity entity, Point pos)
    {
-      Point oldPos = entity.position;
+      Point oldPos = entity.getPosition();
       if (this.withinBounds(pos) && !pos.equals(oldPos))
       {
          this.setOccupancyCell(oldPos, null);
          this.removeEntityAt(pos);
          this.setOccupancyCell(pos, entity);
-         entity.position = pos;
+         entity.setPosition(pos);
       }
    }
 
+
    public void removeEntity(Entity entity)
    {
-      this.removeEntityAt(entity.position);
+      this.removeEntityAt(entity.getPosition());
    }
 
    public void removeEntityAt(Point pos)
@@ -228,7 +230,7 @@ final class WorldModel
 
          /* this moves the entity just outside of the grid for
             debugging purposes */
-         entity.position = new Point(-1, -1);
+         entity.setPosition(new Point(-1, -1));
          this.entities.remove(entity);
          this.setOccupancyCell(pos, null);
       }
@@ -291,10 +293,5 @@ final class WorldModel
    {
       return new Action(ActionKind.ACTIVITY, entity, this, imageStore, 0);
    }
-
-
-
-
-
 
 }
