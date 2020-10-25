@@ -46,7 +46,24 @@ public abstract class Entity
         this.imageIndex = (this.getImageIndex()+ 1) % this.getImages().size();
     }
 
-
+    public static PImage getCurrentImage(Object entity)
+    {
+        if (entity instanceof Background)
+        {
+            return ((Background)entity).images
+                    .get(((Background)entity).imageIndex);
+        }
+        else if (entity instanceof Entity)
+        {
+            return ((Entity)entity).images.get(((Entity)entity).imageIndex);
+        }
+        else
+        {
+            throw new UnsupportedOperationException(
+                    String.format("getCurrentImage not supported for %s",
+                            entity));
+        }
+    }
   /* public static final String OCTO_KEY = "octo";
    public static final int OCTO_NUM_PROPERTIES = 7;
    public static final int OCTO_ID = 1;

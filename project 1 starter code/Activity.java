@@ -18,48 +18,37 @@ public class Activity extends Action{
 
     public void executeAction(EventScheduler scheduler)
     {
-        switch (this.entity.kind)
-        {
-            case OCTO_FULL:
-                this.entity.executeOctoFullActivity(this.world,
-                        this.imageStore, scheduler);
-                break;
-
-            case OCTO_NOT_FULL:
-                this.entity.executeOctoNotFullActivity(this.world,
-                        this.imageStore, scheduler);
-                break;
-
-            case FISH:
-                this.entity.executeFishActivity(this.world, this.imageStore,
-                        scheduler);
-                break;
-
-            case CRAB:
-                this.entity.executeCrabActivity(this.world,
-                        this.imageStore, scheduler);
-                break;
-
-            case QUAKE:
-                this.entity.executeQuakeActivity(this.world, this.imageStore,
-                        scheduler);
-                break;
-
-            case SGRASS:
-                this.entity.executeSgrassActivity(this.world, this.imageStore,
-                        scheduler);
-                break;
-
-            case ATLANTIS:
-                this.entity.executeAtlantisActivity(this.world, this.imageStore,
-                        scheduler);
-                break;
-
-            default:
-                throw new UnsupportedOperationException(
-                        String.format("executeActivityAction not supported for %s",
-                                this.entity.kind));
+        if (this.entity instanceof OctoFull) {
+            ((OctoFull) this.entity).executeActivity(this.world,
+                    this.imageStore, scheduler);
         }
+        if (this.entity instanceof OctoNotFull) {
+            ((OctoNotFull) this.entity).executeActivity(this.world,
+                    this.imageStore, scheduler);
+        }
+        if (this.entity instanceof Fish) {
+            ((Fish) this.entity).executeActivity(this.world,
+                    this.imageStore, scheduler);
+        }
+        if (this.entity instanceof Crab) {
+            ((Fish) this.entity).executeActivity(this.world,
+                    this.imageStore, scheduler);
+        }
+        if (this.entity instanceof Quake) {
+            ((Quake) this.entity).executeActivity(this.world,
+                    this.imageStore, scheduler);
+        }
+        if (this.entity instanceof Atlantis) {
+            ((Atlantis) this.entity).executeActivity(this.world,
+                    this.imageStore, scheduler);
+        }
+        if (this.entity instanceof SGrass) {
+            ((SGrass) this.entity).executeActivity(this.world,
+                    this.imageStore, scheduler);
+        }
+        throw new UnsupportedOperationException(
+                String.format("executeActivityAction not supported for %s"));
     }
+
 
 }

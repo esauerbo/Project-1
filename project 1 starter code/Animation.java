@@ -15,16 +15,15 @@ public class Animation extends Action {
         return new Animation(entity,null, null, repeatCount);
     }
 
-    public void executeAction(EventScheduler scheduler)
+    public  void executeAction(EventScheduler scheduler)
     {
+
         this.entity.nextImage();
 
         if (this.repeatCount != 1)
         {
-            scheduler.scheduleEvent(this.entity,
-                    createAnimationAction(this.entity,
-                            Math.max(this.repeatCount - 1, 0)),
-                    this.entity.getAnimationPeriod());
+            scheduler.scheduleEvent(this.entity, createAnimationAction(this.entity, Math.max(this.repeatCount - 1, 0) ), this.entity.getAnimationPeriod());
         }
     }
+
 }

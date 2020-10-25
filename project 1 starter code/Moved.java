@@ -12,8 +12,7 @@ public class Moved extends Actioned{
 
 
 
-
-    public Point nextPosition( WorldModel world, Point destPos)
+    public Point nextPosition(WorldModel world, Point destPos)
     {
         int horiz = Integer.signum(destPos.x - this.getPosition().x);
         Point newPos = new Point(this.getPosition().x+ horiz,
@@ -22,14 +21,14 @@ public class Moved extends Actioned{
         Optional<Entity> occupant = world.getOccupant( newPos);
 
         if (horiz == 0 ||
-                (occupant.isPresent() && !(occupant.get().getClass() == Ore.class )))
+                (occupant.isPresent() && !(occupant.get().getClass() == Obstacle.class )))
         {
             int vert = Integer.signum(destPos.y - this.getPosition().y);
             newPos = new Point(this.getPosition().x, this.getPosition().y + vert);
             occupant = world.getOccupant( newPos);
 
             if ((vert == 0) ||
-                    (occupant.isPresent() && !(occupant.get().getClass() == Ore.class)))
+                    (occupant.isPresent() && !(occupant.get().getClass() == Obstacle.class)))
             {
                 newPos = this.getPosition();
             }

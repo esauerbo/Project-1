@@ -6,7 +6,6 @@ EventScheduler: ideally our way of controlling what happens in our virtual world
 
 final class EventScheduler
 {
-   private static final int ATLANTIS_ANIMATION_REPEAT_COUNT = 7;
 
    private PriorityQueue<Event> eventQueue;
    private Map<Entity, List<Event>> pendingEvents;
@@ -19,7 +18,10 @@ final class EventScheduler
       this.timeScale = timeScale;
    }
 
-
+   /*-----------Getters-----------*/
+   public PriorityQueue<Event> getEventQueue(){return  eventQueue;}
+   public Map<Entity, List<Event>>  getPendingEvents(){return pendingEvents;}
+   public double getTimeScale(){return timeScale;}
 
 
    public void scheduleEvent(Entity entity, Action action, long afterPeriod)
