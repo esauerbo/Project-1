@@ -10,4 +10,15 @@ final class Event
       this.time = time;
       this.entity = entity;
    }
+
+   public void setAction(Action action) {
+      this.action = action;
+   }
+
+   public void setEntity(Entity entity) {
+      this.entity = entity;
+   }
+   public Entity getEntity(){return entity;}
+   public Action getAction(){return action;}
+   public long getTime(){return time;}
 }

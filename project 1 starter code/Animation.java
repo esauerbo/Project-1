@@ -17,7 +17,6 @@ public class Animation extends Action {
 
     public  void executeAction(EventScheduler scheduler)
     {
-
         this.entity.nextImage();
 
         if (this.repeatCount != 1)

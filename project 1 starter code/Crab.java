@@ -78,4 +78,29 @@ public class Crab extends Moved {
         }
     }
 
+    public Point nextPositionCrab(WorldModel world, Point destPos)
+    {
+        int horiz = Integer.signum(destPos.x - this.getPosition().x);
+        Point newPos = new Point(this.getPosition().x + horiz,
+                this.getPosition().y);
+
+        Optional<Entity> occupant = world.getOccupant(newPos);
+
+        if (horiz == 0 ||
+                (occupant.isPresent() && !(occupant.get().getClass() == Fish.class)))
+        {
+            int vert = Integer.signum(destPos.y - this.getPosition().y);
+            newPos = new Point(this.getPosition().x, this.getPosition().y + vert);
+            occupant = world.getOccupant(newPos);
+
+            if (vert == 0 ||
+                    (occupant.isPresent() && !(occupant.get().getClass() == Fish.class)))
+            {
+                newPos = this.getPosition();
+            }
+        }
+
+        return newPos;
+    }
+
 }

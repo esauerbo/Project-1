@@ -46,8 +46,8 @@ public class Activity extends Action{
             ((SGrass) this.entity).executeActivity(this.world,
                     this.imageStore, scheduler);
         }
-        throw new UnsupportedOperationException(
-                String.format("executeActivityAction not supported for %s"));
+       /*throw new UnsupportedOperationException(
+                String.format("executeActivityAction not supported for"));*/
     }
 
 

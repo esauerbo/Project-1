@@ -1,7 +1,4 @@
 import processing.core.PImage;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-import java.lang.reflect.Executable;
 import java.util.List;
 
 abstract public class Actioned extends Entity{
@@ -14,8 +11,6 @@ abstract public class Actioned extends Entity{
     {
         super(id,position,images,actionPeriod,animationPeriod);
     }
-
-
 
 
     public void scheduleActions (EventScheduler scheduler, WorldModel world, ImageStore imageStore)

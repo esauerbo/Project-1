@@ -71,7 +71,7 @@ final class EventScheduler
 
          this.removePendingEvent(next);
 
-         next.action.executeAction(this);
+         next.getAction().executeAction(this);
       }
    }
 
