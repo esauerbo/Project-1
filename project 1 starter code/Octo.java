@@ -18,7 +18,6 @@ public abstract class Octo extends Moved {
     protected int resourceCount;
 
     /*-----------Getters-----------*/
-
     public int getResourceLimit() { return resourceLimit; }
     public int getResourceCount() { return resourceCount; }
 

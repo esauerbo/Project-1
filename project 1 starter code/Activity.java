@@ -1,10 +1,5 @@
 public class Activity extends Action{
 
-    private Entity entity;
-    private WorldModel world;
-    private ImageStore imageStore;
-    private int repeatCount;
-
     public Activity( Entity entity, WorldModel world, ImageStore imageStore, int repeatCount) {
         super(entity, world, imageStore, repeatCount);
     }

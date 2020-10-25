@@ -21,7 +21,9 @@ public class Animation extends Action {
 
         if (this.repeatCount != 1)
         {
-            scheduler.scheduleEvent(this.entity, createAnimationAction(this.entity, Math.max(this.repeatCount - 1, 0) ), this.entity.getAnimationPeriod());
+            scheduler.scheduleEvent(this.entity,
+                    createAnimationAction(this.entity, Math.max(this.repeatCount - 1, 0) ),
+                    this.entity.getAnimationPeriod());
         }
     }
 
