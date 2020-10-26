@@ -216,7 +216,7 @@ public final class VirtualWorld
       {
          Point pt = new Point(Integer.parseInt(properties[Octo.OCTO_COL]),
                  Integer.parseInt(properties[Octo.OCTO_ROW]));
-         Entity entity = Octo.createOctoNotFull(properties[Octo.OCTO_ID],
+         Entity entity = OctoNotFull.createOctoNotFull(properties[Octo.OCTO_ID],
                  Integer.parseInt(properties[Octo.OCTO_LIMIT]),
                  pt,
                  Integer.parseInt(properties[Octo.OCTO_ACTION_PERIOD]),

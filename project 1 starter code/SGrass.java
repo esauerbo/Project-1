@@ -11,10 +11,10 @@ public class SGrass extends Entity {
     public static final int SGRASS_ROW = 3;
     public static final int SGRASS_ACTION_PERIOD = 4;
 
-    public SGrass(EntityKind kind, String id, Point position,
+    public SGrass(String id, Point position,
                     List<PImage> images, int resourceLimit, int resourceCount,
                     int actionPeriod, int animationPeriod){
-        super(kind, id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod);
+        super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod);
     }
 
     public void executeSgrassActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
@@ -39,7 +39,7 @@ public class SGrass extends Entity {
     public static SGrass createSgrass(String id, Point position, int actionPeriod,
                                       List<PImage> images)
     {
-        return new SGrass(EntityKind.SGRASS, id, position, images, 0, 0,
+        return new SGrass(id, position, images, 0, 0,
                 actionPeriod, 0);
     }
 }

@@ -16,10 +16,10 @@ public class Fish extends Entity {
     public static final int FISH_CORRUPT_MAX = 30000;
     public static final int FISH_REACH = 1;
 
-    public Fish(EntityKind kind, String id, Point position,
+    public Fish(String id, Point position,
                     List<PImage> images, int resourceLimit, int resourceCount,
                     int actionPeriod, int animationPeriod){
-        super(kind, id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod);
+        super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod);
     }
 
     public void executeFishActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
@@ -42,7 +42,7 @@ public class Fish extends Entity {
     public static Fish createFish(String id, Point position, int actionPeriod,
                                     List<PImage> images)
     {
-        return new Fish(EntityKind.FISH, id, position, images, 0, 0,
+        return new Fish(id, position, images, 0, 0,
                 actionPeriod, 0);
     }
 

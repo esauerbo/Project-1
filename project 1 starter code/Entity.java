@@ -10,7 +10,6 @@ Entity ideally would includes functions for how all the entities in our virtual 
 
 public abstract class Entity
 {
-    private EntityKind kind;
     private String id;
     private Point position;
     private List<PImage> images;
@@ -20,11 +19,10 @@ public abstract class Entity
     private int actionPeriod;
     private int animationPeriod;
 
-   public Entity(EntityKind kind, String id, Point position,
+   public Entity(String id, Point position,
       List<PImage> images, int resourceLimit, int resourceCount,
       int actionPeriod, int animationPeriod)
    {
-      this.kind = kind;
       this.id = id;
       this.position = position;
       this.images = images;
@@ -35,9 +33,6 @@ public abstract class Entity
       this.animationPeriod = animationPeriod;
    }
 
-    public EntityKind getKind() {
-        return kind;
-    }
     public String getId() {
         return id;
     }
@@ -70,19 +65,7 @@ public abstract class Entity
 
     public int getAnimationPeriod()
    {
-      switch (this.kind)
-      {
-         case OCTO_FULL:
-         case OCTO_NOT_FULL:
-         case CRAB:
-         case QUAKE:
-         case ATLANTIS:
-            return this.animationPeriod;
-         default:
-            throw new UnsupportedOperationException(
-                    String.format("getAnimationPeriod not supported for %s",
-                            this.kind));
-      }
+        return animationPeriod;
    }
 
    public void nextImage()
@@ -90,16 +73,6 @@ public abstract class Entity
       this.imageIndex = (this.imageIndex + 1) % this.images.size();
    }
 
-
-
-
-
-
-
-/*   public Action createAnimationAction(int repeatCount)
-   {
-      return new Animation(ActionKind.ANIMATION, this,null, null, repeatCount);
-   }*/
 
 
    public static PImage getCurrentImage(Object entity)
@@ -123,63 +96,50 @@ public abstract class Entity
 
    public void scheduleActions(EventScheduler scheduler, WorldModel world, ImageStore imageStore)
    {
-      switch (this.kind)
-      {
-         case OCTO_FULL:
-            scheduler.scheduleEvent(this,
-                    Activity.createActivityAction(this, imageStore, world),
-                    this.actionPeriod);
-            scheduler.scheduleEvent(this, Animation.createAnimationAction(this, 0),
-                    this.getAnimationPeriod());
-            break;
+       if (this instanceof OctoFull){
+           scheduler.scheduleEvent(this,
+                   Activity.createActivityAction(this, imageStore, world),
+                   this.actionPeriod);
+           scheduler.scheduleEvent(this, Animation.createAnimationAction(this, 0),
+                   this.getAnimationPeriod());
+       }
+       if (this instanceof OctoNotFull) {
+           scheduler.scheduleEvent(this,
+                   Activity.createActivityAction(this, imageStore, world),
+                   this.actionPeriod);
+           scheduler.scheduleEvent(this,
+                   Animation.createAnimationAction(this, 0), this.getAnimationPeriod());
+       } if (this instanceof Fish){
+       scheduler.scheduleEvent(this,
+               Activity.createActivityAction(this, imageStore, world),
+               this.actionPeriod);
+       }
+       if (this instanceof Crab){
+           scheduler.scheduleEvent(this,
+                   Activity.createActivityAction(this, imageStore, world),
+                   this.actionPeriod);
+           scheduler.scheduleEvent(this,
+                   Animation.createAnimationAction(this, 0), this.getAnimationPeriod());
+       }
+       if (this instanceof Quake){
+           scheduler.scheduleEvent(this,
+                   Activity.createActivityAction(this, imageStore, world),
+                   this.actionPeriod);
+           scheduler.scheduleEvent(this,
+                   Animation.createAnimationAction(this, Quake.QUAKE_ANIMATION_REPEAT_COUNT),
+                   this.getAnimationPeriod());
+       }
+       if (this instanceof SGrass){
+           scheduler.scheduleEvent(this,
+                   Activity.createActivityAction(this, imageStore, world),
+                   this.actionPeriod);
+       }
+       if (this instanceof Atlantis){
+           scheduler.scheduleEvent(this,
+                   Animation.createAnimationAction(this, Atlantis.ATLANTIS_ANIMATION_REPEAT_COUNT),
+                   this.getAnimationPeriod());
+       }
 
-         case OCTO_NOT_FULL:
-            scheduler.scheduleEvent(this,
-                    Activity.createActivityAction(this, imageStore, world),
-                    this.actionPeriod);
-            scheduler.scheduleEvent(this,
-                    Animation.createAnimationAction(this, 0), this.getAnimationPeriod());
-            break;
-
-         case FISH:
-            scheduler.scheduleEvent(this,
-                    Activity.createActivityAction(this, imageStore, world),
-                    this.actionPeriod);
-            break;
-
-         case CRAB:
-            scheduler.scheduleEvent(this,
-                    Activity.createActivityAction(this, imageStore, world),
-                    this.actionPeriod);
-            scheduler.scheduleEvent(this,
-                    Animation.createAnimationAction(this, 0), this.getAnimationPeriod());
-            break;
-
-         case QUAKE:
-            scheduler.scheduleEvent(this,
-                    Activity.createActivityAction(this, imageStore, world),
-                    this.actionPeriod);
-            scheduler.scheduleEvent(this,
-                    Animation.createAnimationAction(this, Quake.QUAKE_ANIMATION_REPEAT_COUNT),
-                    this.getAnimationPeriod());
-            break;
-
-         case SGRASS:
-            scheduler.scheduleEvent(this,
-                    Activity.createActivityAction(this, imageStore, world),
-                    this.actionPeriod);
-            break;
-         case ATLANTIS:
-            scheduler.scheduleEvent(this,
-                    Animation.createAnimationAction(this, Atlantis.ATLANTIS_ANIMATION_REPEAT_COUNT),
-                    this.getAnimationPeriod());
-            break;
-
-         default:
-      }
    }
-
-
-
 
 }

@@ -12,16 +12,16 @@ public class Crab extends Entity{
     public static final int CRAB_ANIMATION_MAX = 150;
 
 
-    public Crab(EntityKind kind, String id, Point position,
+    public Crab(String id, Point position,
                 List<PImage> images, int resourceLimit, int resourceCount,
                 int actionPeriod, int animationPeriod){
-        super(kind, id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod);
+        super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod);
     }
 
     public static Crab createCrab(String id, Point position,
                                     int actionPeriod, int animationPeriod, List<PImage> images)
     {
-        return new Crab(EntityKind.CRAB, id, position, images,
+        return new Crab(id, position, images,
                 0, 0, actionPeriod, animationPeriod);
     }
 
@@ -29,7 +29,7 @@ public class Crab extends Entity{
     public void executeCrabActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
     {
         Optional<Entity> crabTarget = world.findNearest(
-                this.getPosition(), EntityKind.SGRASS);
+                this.getPosition(), SGrass.class);
         long nextPeriod = this.getActionPeriod();
 
         if (crabTarget.isPresent())
@@ -63,14 +63,14 @@ public class Crab extends Entity{
         Optional<Entity> occupant = world.getOccupant(newPos);
 
         if (horiz == 0 ||
-                (occupant.isPresent() && !(occupant.get().getKind() == EntityKind.FISH)))
+                (occupant.isPresent() && !(occupant.get().getClass() == Fish.class)))
         {
             int vert = Integer.signum(destPos.y - this.getPosition().y);
             newPos = new Point(this.getPosition().x, this.getPosition().y + vert);
             occupant = world.getOccupant(newPos);
 
             if (vert == 0 ||
-                    (occupant.isPresent() && !(occupant.get().getKind() == EntityKind.FISH)))
+                    (occupant.isPresent() && !(occupant.get().getClass() == Fish.class)))
             {
                 newPos = this.getPosition();
             }

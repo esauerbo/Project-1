@@ -10,16 +10,16 @@ public class Obstacle extends Entity {
     public static final int OBSTACLE_COL = 2;
     public static final int OBSTACLE_ROW = 3;
 
-    public Obstacle(EntityKind kind, String id, Point position,
+    public Obstacle(String id, Point position,
                     List<PImage> images, int resourceLimit, int resourceCount,
                     int actionPeriod, int animationPeriod){
-        super(kind, id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod);
+        super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod);
     }
 
     public static Obstacle createObstacle(String id, Point position,
                                         List<PImage> images)
     {
-        return new Obstacle(EntityKind.OBSTACLE, id, position, images,
+        return new Obstacle(id, position, images,
                 0, 0, 0, 0);
     }
 

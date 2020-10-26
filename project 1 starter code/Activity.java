@@ -14,47 +14,38 @@ public class Activity extends Action {
 
     public void executeAction(EventScheduler scheduler)
     {
-        switch (this.entity.getKind())
-        {
-            case OCTO_FULL:
-                ((Octo)this.entity).executeOctoFullActivity(this.world,
+
+            if (this.entity instanceof OctoFull) {
+                ((OctoFull)this.entity).executeOctoFullActivity(this.world,
                         this.imageStore, scheduler);
-                break;
-
-            case OCTO_NOT_FULL:
-                ((Octo)this.entity).executeOctoNotFullActivity(this.world,
+            }
+            if (this.entity instanceof OctoNotFull) {
+                ((OctoNotFull)this.entity).executeOctoNotFullActivity(this.world,
                         this.imageStore, scheduler);
-                break;
-
-            case FISH:
-                ((Fish)this.entity).executeFishActivity(this.world, this.imageStore,
-                        scheduler);
-                break;
-
-            case CRAB:
+            }
+            if (this.entity instanceof Fish) {
+                ((Fish)this.entity).executeFishActivity(this.world,
+                        this.imageStore, scheduler);
+            }
+            if (this.entity instanceof Crab) {
                 ((Crab)this.entity).executeCrabActivity(this.world,
                         this.imageStore, scheduler);
-                break;
-
-            case QUAKE:
-                ((Quake)this.entity).executeQuakeActivity(this.world, this.imageStore,
-                        scheduler);
-                break;
-
-            case SGRASS:
-                ((SGrass)this.entity).executeSgrassActivity(this.world, this.imageStore,
-                        scheduler);
-                break;
-
-            case ATLANTIS:
-                ((Atlantis)this.entity).executeAtlantisActivity(this.world, this.imageStore,
-                        scheduler);
-                break;
-
-            default:
+            }
+            if (this.entity instanceof Quake) {
+                ((Quake)this.entity).executeQuakeActivity(this.world,
+                        this.imageStore, scheduler);
+            }
+            if (this.entity instanceof SGrass) {
+                ((SGrass)this.entity).executeSgrassActivity(this.world,
+                        this.imageStore, scheduler);
+            }
+            if (this.entity instanceof Atlantis) {
+                ((Atlantis)this.entity).executeAtlantisActivity(this.world,
+                        this.imageStore, scheduler);
+            } else {
                 throw new UnsupportedOperationException(
                         String.format("executeActivityAction not supported for %s",
-                                this.entity.getKind()));
-        }
+                                this.entity.getClass()));
+            }
     }
 }

@@ -11,16 +11,16 @@ public class Atlantis extends Entity{
     public static final int ATLANTIS_ANIMATION_PERIOD = 70;
     public static final int ATLANTIS_ANIMATION_REPEAT_COUNT = 7;
 
-    public Atlantis(EntityKind kind, String id, Point position,
+    public Atlantis(String id, Point position,
                 List<PImage> images, int resourceLimit, int resourceCount,
                 int actionPeriod, int animationPeriod){
-        super(kind, id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod);
+        super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod);
     }
 
     public static Entity createAtlantis(String id, Point position,
                                         List<PImage> images)
     {
-        return new Atlantis(EntityKind.ATLANTIS, id, position, images,
+        return new Atlantis(id, position, images,
                 0, 0, 0, 0);
     }
     public void executeAtlantisActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)

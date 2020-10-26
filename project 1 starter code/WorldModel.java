@@ -33,24 +33,6 @@ final class WorldModel
    }
 
 
-  /* public Optional<Point> findOpenAround(Point pos)
-   {
-      for (int dy = -Fish.FISH_REACH; dy <= Fish.FISH_REACH; dy++)
-      {
-         for (int dx = -Fish.FISH_REACH; dx <= Fish.FISH_REACH; dx++)
-         {
-            Point newPt = new Point(pos.x + dx, pos.y + dy);
-            if (this.withinBounds(newPt) &&
-                    !this.isOccupied(newPt))
-            {
-               return Optional.of(newPt);
-            }
-         }
-      }
-
-      return Optional.empty();
-   }*/
-
    public void load(Scanner in, ImageStore imageStore)
    {
       int lineNumber = 0;
@@ -153,12 +135,12 @@ final class WorldModel
       }
    }
 
-   public Optional<Entity> findNearest(Point pos, EntityKind kind)
+   public Optional<Entity> findNearest(Point pos, Class classtype)
    {
       List<Entity> ofType = new LinkedList<>();
       for (Entity entity : this.entities)
       {
-         if (entity.getKind() == kind)
+         if (entity.getClass() == classtype)
          {
             ofType.add(entity);
          }
