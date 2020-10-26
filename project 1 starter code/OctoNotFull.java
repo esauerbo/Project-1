@@ -11,7 +11,7 @@ public class OctoNotFull extends Octo {
         super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod);
     }
 
-    public void executeOctoNotFullActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+    public void execute(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
     {
         Optional<Entity> notFullTarget = world.findNearest(this.getPosition(),
                 Fish.class);
@@ -30,7 +30,7 @@ public class OctoNotFull extends Octo {
     {
         if (this.getResourceCount() >= this.getResourceCount())
         {
-            Entity octo = OctoFull.createOctoFull(this.getId(), this.getResourceLimit(),
+            OctoFull octo = OctoFull.createOctoFull(this.getId(), this.getResourceLimit(),
                     this.getPosition(), this.getActionPeriod(), this.getAnimationPeriod(),
                     this.getImages());
 
@@ -75,11 +75,11 @@ public class OctoNotFull extends Octo {
     }
 
 
-    public static Octo createOctoNotFull(String id, int resourceLimit,
+    public static OctoNotFull createOctoNotFull(String id, int resourceLimit,
                                          Point position, int actionPeriod, int animationPeriod,
                                          List<PImage> images)
     {
-        return new Octo(id, position, images,
+        return new OctoNotFull(id, position, images,
                 resourceLimit, 0, actionPeriod, animationPeriod);
     }
 

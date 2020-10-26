@@ -1,7 +1,7 @@
 import processing.core.PImage;
-
 import java.util.List;
 import java.util.Optional;
+
 
 public class OctoFull extends Octo {
 
@@ -11,7 +11,7 @@ public class OctoFull extends Octo {
         super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod);
     }
 
-    public void executeOctoFullActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+    public void execute(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
     {
         Optional<Entity> fullTarget = world.findNearest(this.getPosition(),
                 Atlantis.class);
@@ -36,7 +36,7 @@ public class OctoFull extends Octo {
 
     public void transformFull(EventScheduler scheduler, WorldModel world, ImageStore imageStore)
     {
-        Entity octo = OctoNotFull.createOctoNotFull(this.getId(), this.getResourceLimit(),
+        OctoNotFull octo = OctoNotFull.createOctoNotFull(this.getId(), this.getResourceLimit(),
                 this.getPosition(), this.getActionPeriod(), this.getAnimationPeriod(),
                 this.getImages());
 
@@ -47,11 +47,11 @@ public class OctoFull extends Octo {
         this.scheduleActions(scheduler, world, imageStore);
     }
 
-    public static Octo createOctoFull(String id, int resourceLimit,
+    public static OctoFull createOctoFull(String id, int resourceLimit,
                                       Point position, int actionPeriod, int animationPeriod,
                                       List<PImage> images)
     {
-        return new Octo(id, position, images,
+        return new OctoFull(id, position, images,
                 resourceLimit, resourceLimit, actionPeriod, animationPeriod);
     }
 

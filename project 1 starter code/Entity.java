@@ -65,14 +65,21 @@ public abstract class Entity
 
     public int getAnimationPeriod()
    {
-        return animationPeriod;
+        if (this instanceof Crab || this instanceof Octo || this instanceof Atlantis
+        || this instanceof Quake){
+            return this.animationPeriod;
+        } else {
+            throw new UnsupportedOperationException(
+                    String.format("getAnimationPeriod not supported for %s",
+                            this.getClass()));
+        }
    }
+
 
    public void nextImage()
    {
       this.imageIndex = (this.imageIndex + 1) % this.images.size();
    }
-
 
 
    public static PImage getCurrentImage(Object entity)
@@ -96,6 +103,7 @@ public abstract class Entity
 
    public void scheduleActions(EventScheduler scheduler, WorldModel world, ImageStore imageStore)
    {
+
        if (this instanceof OctoFull){
            scheduler.scheduleEvent(this,
                    Activity.createActivityAction(this, imageStore, world),
@@ -141,5 +149,6 @@ public abstract class Entity
        }
 
    }
+
 
 }

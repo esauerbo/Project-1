@@ -14,10 +14,10 @@ public class SGrass extends Entity {
     public SGrass(String id, Point position,
                     List<PImage> images, int resourceLimit, int resourceCount,
                     int actionPeriod, int animationPeriod){
-        super(id, position, images, resourceLimit, resourceCount, actionPeriod, animationPeriod);
+        super(id, position, images, 0, 0, actionPeriod, 0);
     }
 
-    public void executeSgrassActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+    public void execute(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
     {
         Optional<Point> openPt = Fish.findOpenAround(world, this.getPosition());
 

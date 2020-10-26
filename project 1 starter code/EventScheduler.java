@@ -21,7 +21,6 @@ final class EventScheduler
 
 
 
-
    public void scheduleEvent(Entity entity, Action action, long afterPeriod)
    {
       long time = System.currentTimeMillis() +

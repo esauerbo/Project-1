@@ -26,7 +26,7 @@ public class Crab extends Entity{
     }
 
 
-    public void executeCrabActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+    public void execute(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
     {
         Optional<Entity> crabTarget = world.findNearest(
                 this.getPosition(), SGrass.class);
