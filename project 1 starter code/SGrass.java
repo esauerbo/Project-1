@@ -19,7 +19,7 @@ public class SGrass extends Entity {
 
     public void executeSgrassActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
     {
-        Optional<Point> openPt = world.findOpenAround(this.getPosition());
+        Optional<Point> openPt = Fish.findOpenAround(world, this.getPosition());
 
         if (openPt.isPresent())
         {
@@ -32,7 +32,7 @@ public class SGrass extends Entity {
         }
 
         scheduler.scheduleEvent(this,
-                world.createActivityAction(this, imageStore),
+                Activity.createActivityAction(this, imageStore, world),
                 this.getActionPeriod());
     }
 

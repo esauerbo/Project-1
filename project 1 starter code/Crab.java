@@ -48,7 +48,7 @@ public class Crab extends Entity{
         }
 
         scheduler.scheduleEvent(this,
-                world.createActivityAction(this, imageStore),
+                Activity.createActivityAction(this, imageStore, world),
                 nextPeriod);
     }
 

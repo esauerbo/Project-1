@@ -38,7 +38,7 @@ public class Octo extends Entity {
         else
         {
             scheduler.scheduleEvent(this,
-                    world.createActivityAction(this, imageStore),
+                    Activity.createActivityAction(this, imageStore, world),
                     this.getActionPeriod());
         }
     }
@@ -54,7 +54,7 @@ public class Octo extends Entity {
                 !this.transformNotFull(scheduler, world, imageStore))
         {
             scheduler.scheduleEvent(this,
-                    world.createActivityAction(this, imageStore),
+                    Activity.createActivityAction(this, imageStore, world),
                     this.getActionPeriod());
         }
     }

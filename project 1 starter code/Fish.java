@@ -1,6 +1,7 @@
 import processing.core.PImage;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Fish extends Entity {
 
@@ -43,6 +44,25 @@ public class Fish extends Entity {
     {
         return new Fish(EntityKind.FISH, id, position, images, 0, 0,
                 actionPeriod, 0);
+    }
+
+
+    public static Optional<Point> findOpenAround(WorldModel world, Point pos)
+    {
+        for (int dy = -FISH_REACH; dy <= FISH_REACH; dy++)
+        {
+            for (int dx = -FISH_REACH; dx <= FISH_REACH; dx++)
+            {
+                Point newPt = new Point(pos.x + dx, pos.y + dy);
+                if (world.withinBounds(newPt) &&
+                        !world.isOccupied(newPt))
+                {
+                    return Optional.of(newPt);
+                }
+            }
+        }
+
+        return Optional.empty();
     }
 
 }

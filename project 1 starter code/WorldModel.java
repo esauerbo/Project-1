@@ -33,33 +33,7 @@ final class WorldModel
    }
 
 
- /*  public boolean moveToCrab(Entity crab, Entity target, EventScheduler scheduler)
-   {
-      if (crab.getPosition().adjacent(target.getPosition()))
-      {
-         this.removeEntity(target);
-         scheduler.unscheduleAllEvents(target);
-         return true;
-      }
-      else
-      {
-         Point nextPos = crab.nextPositionCrab( this, target.getPosition());
-
-         if (!crab.position.equals(nextPos))
-         {
-            Optional<Entity> occupant = this.getOccupant(nextPos);
-            if (occupant.isPresent())
-            {
-               scheduler.unscheduleAllEvents(occupant.get());
-            }
-
-            this.moveEntity(crab, nextPos);
-         }
-         return false;
-      }
-   }*/
-
-   public Optional<Point> findOpenAround(Point pos)
+  /* public Optional<Point> findOpenAround(Point pos)
    {
       for (int dy = -Fish.FISH_REACH; dy <= Fish.FISH_REACH; dy++)
       {
@@ -75,7 +49,7 @@ final class WorldModel
       }
 
       return Optional.empty();
-   }
+   }*/
 
    public void load(Scanner in, ImageStore imageStore)
    {
@@ -289,9 +263,6 @@ final class WorldModel
       this.background[pos.y][pos.x] = background;
    }
 
-   public Action createActivityAction(Entity entity, ImageStore imageStore)
-   {
-      return new Action(ActionKind.ACTIVITY, entity, this, imageStore, 0);
-   }
+
 
 }

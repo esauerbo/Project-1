@@ -21,4 +21,10 @@ public class Quake extends Entity{
         return new Quake(EntityKind.QUAKE, Quake.QUAKE_ID, position, images,
                 0, 0, Quake.QUAKE_ACTION_PERIOD, Quake.QUAKE_ANIMATION_PERIOD);
     }
+
+    public void executeQuakeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+    {
+        scheduler.unscheduleAllEvents(this);
+        world.removeEntity(this);
+    }
 }
