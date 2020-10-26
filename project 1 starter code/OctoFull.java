@@ -42,7 +42,6 @@ public class OctoFull extends Octo {
 
         world.removeEntity(this);
         scheduler.unscheduleAllEvents(this);
-
         world.addEntity(octo);
         this.scheduleActions(scheduler, world, imageStore);
     }

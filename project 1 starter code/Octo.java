@@ -22,7 +22,6 @@ public class Octo extends Entity {
 
 
 
-
     public Point nextPositionOcto(WorldModel world, Point destPos)
     {
         int horiz = Integer.signum(destPos.x - this.getPosition().x);
